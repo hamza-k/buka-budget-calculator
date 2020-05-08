@@ -1,0 +1,17 @@
+{
+  "name": "hk-budget-calculator",
+  "displayName": "hk-budget-calculator",
+  "expo": {
+    "name": "hk-budget-calculator",
+    "slug": "hk-budget-calculator",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
