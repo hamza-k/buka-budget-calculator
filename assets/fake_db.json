@@ -1,0 +1,80 @@
+{
+    "name" : "Budget Calculator",
+    "author" : "Hamza Khadri",
+    "username" : "Zam Shelby",
+    "device" : "€",
+    "budget_list" : [
+        {
+            "budget_id" : 112321, 
+            "budget_name" : "Mexico holiday", 
+            "budget_items" : [
+                {
+                    "item_id" : 234768,
+                    "item_name" : "Flight bill",
+                    "item_price" : 650,
+                    "item_checked" : true
+                },
+                {
+                    "item_id" : 34567,
+                    "item_name" : "Car location",
+                    "item_price" : 390,
+                    "item_checked" : false
+                },
+                {
+                    "item_id" : 22321,
+                    "item_name" : "VISA",
+                    "item_price" : 150,
+                    "item_checked" : true
+                }
+            ]
+        },
+        {
+            "budget_id" : 123456, 
+            "budget_name" : "USA holiday", 
+            "budget_items" : [
+                {
+                    "item_id" : 25433,
+                    "item_name" : "Flight bill",
+                    "item_price" : 650,
+                    "item_checked" : true
+                },
+                {
+                    "item_id" : 34567,
+                    "item_name" : "Car location",
+                    "item_price" : 390,
+                    "item_checked" : true
+                },
+                {
+                    "item_id" : 77655,
+                    "item_name" : "VISA",
+                    "item_price" : 150,
+                    "item_checked" : true
+                }
+            ]
+        },
+        {
+            "budget_id" : 93847, 
+            "budget_name" : "", 
+            "budget_items" : [
+                {
+                    "item_id" : 25433,
+                    "item_name" : "",
+                    "item_price" : 0,
+                    "item_checked" : false
+                },
+                {
+                    "item_id" : 34567,
+                    "item_name" : "",
+                    "item_price" : 0,
+                    "item_checked" : false
+                },
+                {
+                    "item_id" : 77655,
+                    "item_name" : "",
+                    "item_price" : 0,
+                    "item_checked" : false
+                }
+            ]
+        }
+    ]
+}

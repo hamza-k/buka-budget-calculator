@@ -1,23 +1,23 @@
-//This is an example code to pass values between two screens using React Navigator// 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-//Import react-navigation
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator} from 'react-navigation-stack'
 
-import FirstPage from './components/FirstPage';
-import SecondPage from './components/SecondPage';
+import HomePage from './components/HomePage'
+import OptionPage from './components/OptionPage'
+import BudgetPage from './components/BudgetPage'
 
-//import all the screens we are going to switch 
+// const App = createStackNavigator({
+//     FirstPage: { screen: FirstPage }, 
+//     SecondPage: { screen: SecondPage }, 
+//   },{ initialRouteName: 'FirstPage',}
+// );
+
 const App = createStackNavigator({
-  //Constant which holds all the screens like index of any book 
-    FirstPage: { screen: FirstPage }, 
-    //First entry by default be our first screen 
-    //if we do not define initialRouteName
-    SecondPage: { screen: SecondPage }, 
-  },
-  {
-    initialRouteName: 'FirstPage',
-  }
+    HomePage: { screen: HomePage }, 
+    OptionPage: { screen: OptionPage }, 
+    BudgetPage: { screen: BudgetPage }, 
+  },{ initialRouteName: 'HomePage',}
 );
+
 export default createAppContainer(App);
