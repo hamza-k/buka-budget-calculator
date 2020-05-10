@@ -39,13 +39,21 @@ class BudgetListElement extends Component {
         }
     }
 
+    getBudgetName = () => {
+        if (this.state.dataElement.budget_name != "") {
+            return [{fontWeight: "bold", fontStyle: "italic"}, this.state.dataElement.budget_name,]
+        } else {
+            return [{textTransform: "uppercase"}, "No name here"]
+        }
+    }
+
     render(){
         const {dataElement} = this.state
 
         return (
             <View style={style.container}>
                 {this.isAllCompleted()}
-                <Text style={style.title}>{dataElement.budget_name}</Text>
+                <Text style={[style.title, this.getBudgetName()[1]]}>{this.getBudgetName()[1]}</Text>
                 <View style={{flexDirection : 'row', paddingTop: 10, alignItems : "flex-end", marginBottom: 20, marginHorizontal: 20}}>
                     <Text style={style.pricingTag}>Progress : </Text>
                     <Text style={style.pricingCheckedTag}>{this.getTotalCheckedItem()} €</Text>
@@ -70,8 +78,6 @@ const style = StyleSheet.create({
     title : {
         color : "#fbfbfb",
         fontSize : 20,
-        fontWeight : "bold",
-        fontStyle : "italic",
         borderBottomWidth : 1,
         borderBottomColor : "#fbfbfb",
         paddingBottom : 10,

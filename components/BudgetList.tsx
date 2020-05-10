@@ -18,6 +18,8 @@ export default BudgetList
 const style = StyleSheet.create({
     container : {
         paddingHorizontal : 10,
-        paddingVertical : 20
+        marginTop : 3,
+        paddingTop : 20,
+        marginBottom: 58
     }
 })

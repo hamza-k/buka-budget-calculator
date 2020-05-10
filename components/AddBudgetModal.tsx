@@ -1,14 +1,30 @@
 import React, { Component } from 'react'
-import {View, StyleSheet, Text} from 'react-native'
-import { Button } from 'react-native-elements';
+import {View, StyleSheet, Text, TextInput, TouchableWithoutFeedback} from 'react-native'
+import { Button, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
 const AddBudgetModal = ({isActive, exitModalCB}) => (
-    <View 
+    <TouchableWithoutFeedback
     style={[style.container, {height: (isActive) ? "100%" : 0}]}
     onPress={() => exitModalCB()}>
+    <View 
+    style={[style.container, {height: (isActive) ? "100%" : 0}]}>
+        <TouchableWithoutFeedback>
         <View style={[style.modal, {bottom : (isActive) ? 0 : -350}]}>
-            <Text style={style.title}>Let's start</Text>
+            <Input
+            placeholder='Insert first your budget name'
+            leftIcon={
+                <Icon
+                name='chevron-right'
+                size={20}
+                color='#fbfbfb'
+                />
+            }
+            containerStyle={{marginBottom: 30}}
+            inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+            labelStyle={{fontStyle: "italic"}}
+            />
+            <Text style={style.title}>Let's start with</Text>
             <View style={{flexDirection: 'row', justifyContent: "space-evenly"}}>
                 <Button
                 icon={
@@ -38,7 +54,9 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
                 onPress={() => exitModalCB()}/>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     </View>
+    </TouchableWithoutFeedback>
 )
 
 export default AddBudgetModal
@@ -59,10 +77,18 @@ const style = StyleSheet.create({
     },
     title : {
         color: "#fbfbfb",
-        fontSize: 28,
+        fontSize: 24,
         fontWeight: "bold",
         textAlign: "center",
         width: "100%",
-        marginBottom: 20
+        marginBottom: 0
+    },
+    input : {
+        color: "#fbfbfb",
+        borderBottomColor: "#fbfbfb",
+        borderBottomWidth: 1,
+        marginBottom: 30,
+        fontSize: 30,
+        paddingBottom: 5
     }
 })

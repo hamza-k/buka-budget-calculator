@@ -27,12 +27,22 @@ export default class HomePage extends Component {
         })
     }
 
+    goOption = () => {
+        const { navigate } = this.props.navigation;
+        navigate('OptionPage')
+    }
+
+    goHome = () => {
+        const { navigate } = this.props.navigation;
+        navigate('HomePage')
+    }
+
     render(){
         const { navigate } = this.props.navigation;
         return (
             <View style={style.container}>
                 <StatusBarComp/>
-                <Header title="Budget Calculator"/>
+                <Header title="Budget Calculator" isHome={true} goOptionCB={this.goOption} goHomeCB={this.goHome} />
                 <BudgetList dataList={this.state.budgetList}/>
                 <AddBudgetButton activeModalCB={this.toggleModalActive}/>
                 <AddBudgetModal exitModalCB={this.toggleModalActive} isActive={this.state.isModalActive}/>
