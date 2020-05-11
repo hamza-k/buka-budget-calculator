@@ -53,7 +53,7 @@ class BudgetListElement extends Component {
         return (
             <View style={style.container}>
                 {this.isAllCompleted()}
-                <Text style={[style.title, this.getBudgetName()[1]]}>{this.getBudgetName()[1]}</Text>
+                <Text style={[style.title, this.getBudgetName()[0]]}>{this.getBudgetName()[1]}</Text>
                 <View style={{flexDirection : 'row', paddingTop: 10, alignItems : "flex-end", marginBottom: 20, marginHorizontal: 20}}>
                     <Text style={style.pricingTag}>Progress : </Text>
                     <Text style={style.pricingCheckedTag}>{this.getTotalCheckedItem()} €</Text>

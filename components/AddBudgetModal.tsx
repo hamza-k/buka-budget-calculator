@@ -12,7 +12,7 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
         <TouchableWithoutFeedback>
         <View style={[style.modal, {bottom : (isActive) ? 0 : -350}]}>
             <Input
-            placeholder='Insert first your budget name'
+            placeholder='Enter first your budget name'
             leftIcon={
                 <Icon
                 name='chevron-right'
@@ -36,7 +36,7 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
                 }
                 iconLeft
                 title="Calculator"
-                titleStyle={{fontSize: 20, marginTop: 10}}
+                titleStyle={{fontSize: 20, marginTop: 10, width: 50}}
                 buttonStyle={{flexDirection: "column", backgroundColor: "transparent", paddingHorizontal: 20}}
                 onPress={() => exitModalCB()}/>
                 <Button

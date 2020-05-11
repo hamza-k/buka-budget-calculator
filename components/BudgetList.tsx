@@ -1,13 +1,21 @@
 import React from 'react'
-import {ScrollView, Text, StyleSheet} from 'react-native'
+import {ScrollView, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import BudgetListElement from './BudgetListElement'
 
-const BudgetList = ({dataList}) => {
+const BudgetList = ({dataList, setBudgetElementMenu, setBudgetPage}) => {
 
     return (
         <ScrollView style={style.container}>
             {dataList.map(el => {
-                return <BudgetListElement key={el.budget_id} dataElement={el}/>
+                return (
+                    <TouchableOpacity 
+                    activeOpacity={.8} 
+                    key={el.budget_id} 
+                    onLongPress={() => setBudgetElementMenu(el)}
+                    onPress={() => setBudgetPage(el)}>
+                        <BudgetListElement dataElement={el}/>
+                    </TouchableOpacity>
+                    )
             })}
         </ScrollView>
     )
