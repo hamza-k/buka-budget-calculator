@@ -36,7 +36,7 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
                 }
                 iconLeft
                 title="Calculator"
-                titleStyle={{fontSize: 20, marginTop: 10, width: 50}}
+                titleStyle={{fontSize: 20, marginTop: 10, width: "100%"}}
                 buttonStyle={{flexDirection: "column", backgroundColor: "transparent", paddingHorizontal: 20}}
                 onPress={() => exitModalCB()}/>
                 <Button
@@ -49,8 +49,8 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
                 }
                 iconLeft
                 title="Checklist"
-                titleStyle={{fontSize: 20, marginTop: 10}}
-                buttonStyle={{flexDirection: "column", backgroundColor: "transparent", paddingHorizontal: 20}}
+                titleStyle={{fontSize: 20, marginTop: 10, width: "100%"}}
+                buttonStyle={{flexDirection: "column", backgroundColor: "transparent", paddingHorizontal: 20, width: "100%"}}
                 onPress={() => exitModalCB()}/>
             </View>
         </View>

@@ -27,7 +27,11 @@ export default class OptionPage extends Component {
         return(
             <View>
                 <StatusBarComp/>
-                <Header title="Budget Calculator" isHome={false} goOptionCB={this.goOption} goHomeCB={this.goHome} />
+
+                <Header title="Budget Calculator" 
+                goOptionCB={this.goOption} 
+                goHomeCB={this.goHome} />
+                
                 <Text>Option Page</Text>
             </View>
         )
