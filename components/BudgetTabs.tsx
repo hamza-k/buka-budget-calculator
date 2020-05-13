@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native'
+import {Animated, View, TouchableOpacity, Text, StyleSheet} from 'react-native'
 
 const BudgetTabs = ({activeTab, setTabCB}) => (
     <View style={style.container}>

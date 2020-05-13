@@ -61,7 +61,7 @@ export default class HomePage extends Component {
 
     goBudgetPage = (el) => {
         const { navigate } = this.props.navigation;
-        navigate('BudgetPage', {BUDGET_ELEMENT : el})
+        navigate('BudgetPage', {BUDGET_ELEMENT : el, BUDGET_TAB : "checklist"})
     }
 
     enterBudgetDeleteModaleActive = () => {

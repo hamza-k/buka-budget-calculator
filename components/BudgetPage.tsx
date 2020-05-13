@@ -15,10 +15,12 @@ export default class BudgetPage extends Component {
         this.state = {
             budgetList : budgetDB.budget_list,
             activeBudget : this.props.navigation.state.params.BUDGET_ELEMENT,
-            activeTab : "calculator"
+            activeTab : this.props.navigation.state.params.BUDGET_TAB,
+            calculatorOutput : "0"
         }
     }
 
+    // Navigation
     static navigationOptions = {
         headerShown: false,
       };
@@ -27,18 +29,17 @@ export default class BudgetPage extends Component {
         const { navigate } = this.props.navigation;
         navigate('OptionPage')
     }
-
     goHome = () => {
         const { navigate } = this.props.navigation;
         navigate('HomePage')
     }
 
+    // Header
     setTab = tab => {
         this.setState({
             activeTab: tab
         })
     }
-
     getTotalPrice = () => {
         let totalPrice = 0
         this.state.activeBudget.budget_items.forEach(item => {
@@ -46,7 +47,6 @@ export default class BudgetPage extends Component {
         })
         return totalPrice
     }
-
     getTotalCheckedPrice = () => {
         let totalCheckedPrice = 0
         this.state.activeBudget.budget_items.forEach(item => {
@@ -55,6 +55,62 @@ export default class BudgetPage extends Component {
         })
         return totalCheckedPrice
     }
+
+    // Calculator
+    setCalcInput = (el) => {
+        if (this.state.calculatorOutput == '0' || this.state.calculatorOutput == 'Error') {
+            this.setState({calculatorOutput : el})
+        } else {
+            this.setState({calculatorOutput : this.state.calculatorOutput + el})
+        }
+    }
+    setCalcOperator = (el) =>{
+        var outputArray = this.state.calculatorOutput.split('')
+        if (outputArray[outputArray.length - 1] == '(' && el != "-") {
+            outputArray.pop()
+            outputArray.pop()
+            outputArray.push(el)
+        }
+        if ( outputArray[outputArray.length - 1] == '+' 
+        || outputArray[outputArray.length - 1] == '-' 
+        || outputArray[outputArray.length - 1] == '*' 
+        || outputArray[outputArray.length - 1] == '/') {
+            outputArray.pop()
+        }
+        outputArray.push(el)
+        this.setState({calculatorOutput : outputArray.join('')})
+
+    }
+    setInvertOutput = () => {
+        let outputArray = this.state.calculatorOutput.split('')
+        if (outputArray[0] === '-') {
+            outputArray.shift()
+        } else {
+            outputArray.unshift('-')
+        }
+        this.setState({calculatorOutput : outputArray.join('')})
+    }
+    setEraseOutput = () => {
+        this.setState({calculatorOutput : '0'})
+    }
+    setEvalPercentage = () => {
+        if (this.state.calculatorOutput / 100 != NaN){
+            this.setState({calculatorOutput : (this.state.calculatorOutput / 100).toString()})
+        } else {
+            this.setState({calculatorOutput : "Error"})
+        }
+    }
+    setEvalOutput = () => {
+        this.setState({calculatorOutput : eval(this.state.calculatorOutput).toString()})
+    }
+
+    // Latest Item (Calculator Page)
+    fetchBudgetLatestItems = () => {
+        let result_fetchCalcItem = this.state.activeBudget.budget_items.slice(-4)
+        // ! \\ display absolutly 3/4 latest items
+        
+    }
+    
 
     render(){
         const { navigate } = this.props.navigation;
@@ -79,9 +135,23 @@ export default class BudgetPage extends Component {
 
                 </View>
 
-                <View>
-                    <CalculatorPage/>
-                    <ChecklistPage/>
+                <View style={{position: "relative"}}>
+
+                    <CalculatorPage 
+                    budgetLatestItems={this.fetchBudgetLatestItems}
+                    isActive={this.state.activeTab == "calculator"}
+                    calcOutput={this.state.calculatorOutput}
+                    doCalcInput={this.setCalcInput}
+                    doCalcOperator={this.setCalcOperator}
+                    doInvertOutput={this.setInvertOutput}
+                    doEraseOutput={this.setEraseOutput}
+                    doEvalPercentage={this.setEvalPercentage}
+                    doEvalOutput={this.setEvalOutput}/>
+
+                    <ChecklistPage 
+                    isActive={this.state.activeTab == "checklist"}
+                    budget={this.state.activeBudget}/>
+
                 </View>
             </View>
         )
