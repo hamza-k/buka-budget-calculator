@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native'
 
 const BudgetHeader = ({budgetName, totalPrice, totalCheckedPrice}) => (
     <View style={style.container}>
-        <Text style={[style.budgetName, {opacity : (budgetName != "") ? 1 : 0.5}]}>{(budgetName != "") ? budgetName : "NO NAME"}</Text>
+        <Text style={[style.budgetName, {opacity : (budgetName != "") ? 1 : 0.5}]}>{(budgetName != "") ? budgetName : "No budget name"}</Text>
         <Text style={style.budgetPriceTotal}>Over {totalPrice} €</Text>
         <Text style={style.budgetPriceLeft}>{totalCheckedPrice} €</Text>
     </View>

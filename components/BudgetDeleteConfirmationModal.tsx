@@ -10,8 +10,12 @@ const BudgetDeleteConfirmationModal = ({isActive, budgetElement, exitModalCB, to
     <View style={[style.container, {height: (isActive) ? "100%" : 0}]}>
         <TouchableWithoutFeedback>
             <View style={[style.modal, {bottom : (isActive) ? 0 : -350}]}>
-                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15}}>Are you sure to delete this budget :</Text>
-                <Text style={style.title}>{(budgetElement.budget_name != "") ? budgetElement.budget_name : "NO NAME HERE"}</Text>
+                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15}}>Are you sure you want to delete this budget :</Text>
+                <Text style={[style.title, {
+                    fontWeight: (budgetElement.budget_name != "") ? "bold" : "normal",
+                    fontStyle : (budgetElement.budget_name != "") ? "normal" : "italic",
+                    opacity : (budgetElement.budget_name != "") ? 1.0 : 0.5
+                }]}>{(budgetElement.budget_name != "") ? budgetElement.budget_name : "No name budget"}</Text>
                 <View style={style.buttonsContainer}>
                     <View style={style.buttonItem}>
                         <Button

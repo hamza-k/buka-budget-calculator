@@ -3,7 +3,12 @@ import {View, StyleSheet, Text, TextInput, TouchableWithoutFeedback} from 'react
 import { Button, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const AddBudgetModal = ({isActive, exitModalCB}) => (
+const AddBudgetModal = ({
+    isActive, 
+    exitModalCB,
+    createNewBudgetCB,
+    getNewBudgetNameCB
+    }) => (
     <TouchableWithoutFeedback
     style={[style.container, {height: (isActive) ? "100%" : 0}]}
     onPress={() => exitModalCB()}>
@@ -23,7 +28,7 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
             containerStyle={{marginBottom: 30}}
             inputStyle={{fontSize: 20, color: "#fbfbfb"}}
             labelStyle={{fontStyle: "italic"}}
-            />
+            onChangeText={value => getNewBudgetNameCB(value)}/>
             <Text style={style.title}>Let's start with</Text>
             <View style={{flexDirection: 'row', justifyContent: "space-evenly"}}>
                 <Button
@@ -38,7 +43,7 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
                 title="Calculator"
                 titleStyle={{fontSize: 20, marginTop: 10, width: "100%"}}
                 buttonStyle={{flexDirection: "column", backgroundColor: "transparent", paddingHorizontal: 20}}
-                onPress={() => exitModalCB()}/>
+                onPress={() => createNewBudgetCB("calculator")}/>
                 <Button
                 icon={
                     <Icon
@@ -51,7 +56,7 @@ const AddBudgetModal = ({isActive, exitModalCB}) => (
                 title="Checklist"
                 titleStyle={{fontSize: 20, marginTop: 10, width: "100%"}}
                 buttonStyle={{flexDirection: "column", backgroundColor: "transparent", paddingHorizontal: 20, width: "100%"}}
-                onPress={() => exitModalCB()}/>
+                onPress={() => createNewBudgetCB("checklist")}/>
             </View>
         </View>
         </TouchableWithoutFeedback>

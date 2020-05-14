@@ -3,7 +3,6 @@ import {ScrollView, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import BudgetListElement from './BudgetListElement'
 
 const BudgetList = ({dataList, setBudgetElementMenu, setBudgetPage}) => {
-
     return (
         <ScrollView style={style.container}>
             {dataList.map(el => {

@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native'
 
 import Icon from 'react-native-vector-icons/AntDesign';
+import Eicon from 'react-native-vector-icons/Entypo';
 
 const CalculatorPage = ({
     budgetLatestItems,
@@ -13,21 +14,41 @@ const CalculatorPage = ({
     doEraseOutput,
     doEvalPercentage,
     doEvalOutput,
+    latestBudgetItems
     }) =>  (
     <View style={[style.container, {right: (isActive) ? 0 : "100%" }]}>
         <View style={style.latestBudgetContainer}>
-            <View style={[style.latestBudgetItemContainer, {backgroundColor: "#202020", paddingHorizontal: 20, borderRadius: 6}]}>
-                <Text style={style.latestBudgetItemText}>Flight bills</Text>
-                <Text style={[style.latestBudgetItemText, style.latestBudgetItemPrice]}>333 €</Text>
+            <View style={[style.emptyListContainer, {
+                height: (budgetLatestItems == []) ? "100%" : 0, 
+                marginTop: (budgetLatestItems == []) ? 3 : 0,
+                paddingTop: (budgetLatestItems == []) ? 50 : 0,
+                opacity : (budgetLatestItems == []) ? 0.4 : 0}]}>
+                <View style={{width: "100%", alignItems: "center"}}>
+                    <Eicon
+                    name="calculator"
+                    size={60}
+                    color="white"
+                    />
+                </View>
+                <Text style={style.emptyArrayMessage}>Let's start to calculate a new item</Text>
             </View>
-            <View style={[style.latestBudgetItemContainer, {backgroundColor: "#202020", paddingHorizontal: 20, borderRadius: 6}]}>
-                <Text style={style.latestBudgetItemText}>Hotel</Text>
-                <Text style={[style.latestBudgetItemText, style.latestBudgetItemPrice]}>666 €</Text>
-            </View>
-            <View style={[style.latestBudgetItemContainer, {backgroundColor: "#202020", paddingHorizontal: 20, borderRadius: 6}]}>
-                <Text style={style.latestBudgetItemText}>Car location</Text>
-                <Text style={[style.latestBudgetItemText, style.latestBudgetItemPrice]}>999 €</Text>
-            </View>
+            {
+                latestBudgetItems.map(element => {
+                    
+                    return (
+                        <View key={element.item_id} style={[style.latestBudgetItemContainer, {backgroundColor: "#202020", paddingHorizontal: 20, borderRadius: 6}]}>
+                            <Text style={[style.latestBudgetItemText, {
+                                fontWeight: (element.item_name != "") ? "bold" : "normal",
+                                fontStyle: (element.item_name == "") ? "italic" : "normal",
+                                opacity : (element.item_name != "") ? 1.0 : 0.5
+                            }]}>
+                                {(element.item_name != "") ? element.item_name : "No name here"}
+                            </Text>
+                            <Text style={[style.latestBudgetItemText, style.latestBudgetItemPrice]}>{element.item_price} €</Text>
+                        </View>
+                    )
+                })
+            }
         </View>
         <View style={[style.latestBudgetItemContainer]}>
             <Text 
@@ -194,13 +215,14 @@ const style = StyleSheet.create({
     latestBudgetContainer : {
         padding: 10, 
         height: Dimensions.get('window').height - 620,
-        justifyContent: "space-evenly",
-        flexDirection: "column-reverse"
+        justifyContent: "flex-end",
+        flexDirection: "column"
     },
     latestBudgetItemContainer : {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems : "center"
+        alignItems : "center",
+        marginTop: 15
     },
     latestBudgetItemText : {
         color: "#fbfbfb", 
@@ -268,5 +290,20 @@ const style = StyleSheet.create({
     coloredButton: {
         backgroundColor: "#303030",
         borderRadius: 3
+    },
+    emptyArrayMessage : {
+        fontSize: 30,
+        color: "#fbfbfb",
+        textAlign: "center",
+        width: "70%",
+        marginTop: 10
+    },
+    emptyListContainer : {
+        paddingHorizontal : 10,
+        marginTop : 3,
+        paddingTop : 50,
+        width: "100%",
+        alignItems: "center",
+        opacity: 0.4
     }
 })

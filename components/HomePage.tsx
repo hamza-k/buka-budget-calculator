@@ -23,7 +23,8 @@ export default class HomePage extends Component {
             isBudgetMenuActive : false,
             isBudgetDeleteModaleActive : false,
             isBudgetEditModaleActive : false,
-            activeBudget : {}
+            activeBudget : {},
+            newBudgetName : ""
         }
     }
 
@@ -36,17 +37,14 @@ export default class HomePage extends Component {
             isModalActive : !this.state.isModalActive
         })
     }
-
     goOption = () => {
         const { navigate } = this.props.navigation;
         navigate('OptionPage')
     }
-
     goHome = () => {
         const { navigate } = this.props.navigation;
         navigate('HomePage')
     }
-
     toggleBudgetElementMenu = (el) => {
         let newActiveBudget = el
         this.setState({
@@ -54,29 +52,24 @@ export default class HomePage extends Component {
             activeBudget : newActiveBudget
         })
     }
-
     exitBudgetElementMenu = () => {
         this.setState({isBudgetMenuActive : false})
     }
-
     goBudgetPage = (el) => {
         const { navigate } = this.props.navigation;
         navigate('BudgetPage', {BUDGET_ELEMENT : el, BUDGET_TAB : "checklist"})
     }
-
     enterBudgetDeleteModaleActive = () => {
         this.setState({
             isBudgetDeleteModaleActive: true,
             isBudgetMenuActive : false
             })
     }
-
     exitBudgetDeleteModale = () => {
         this.setState({
             isBudgetDeleteModaleActive: false
             })
     }
-
     deleteBudget = (el) => {
         let newBudgetList = this.state.budgetList.filter(item => item.budget_id != el.budget_id)
         this.setState({
@@ -84,20 +77,17 @@ export default class HomePage extends Component {
             isBudgetDeleteModaleActive: false
         })
     }
-
     enterBudgetEditModaleActive = () => {
         this.setState({
             isBudgetMenuActive : false,
             isBudgetEditModaleActive : true
         })
     }
-
     exitBudgetEditModale = () => {
         this.setState({
             isBudgetEditModaleActive: false
             })
     }
-
     getBudgetList = () => {
         if (this.state.budgetList.length > 0) {
             return (
@@ -121,13 +111,35 @@ export default class HomePage extends Component {
             )
         }
     }
-
     changeBudgetNameData = el => {
         let newCurrentBudget = this.state.activeBudget
         newCurrentBudget.budget_name = el
         this.setState({
             activeBudget : newCurrentBudget
         })
+    }
+    getNewBudgetName = el => {
+        this.setState({
+            newBudgetName : el
+        })
+    }
+    createNewBudget = el => {
+        let generatedBudgetID = Math.round(Math.random() * 1000000)
+        let newBudget = {
+            "budget_id" : generatedBudgetID,
+            "budget_name" : this.state.newBudgetName,
+            "budget_items" : []
+        }
+        let newBudgetList = this.state.budgetList
+        newBudgetList.push(newBudget)
+        this.setState({
+            isModalActive : false,
+            budgetList : newBudgetList,
+            newBudgetName : ""
+        })
+
+        const { navigate } = this.props.navigation;
+        navigate('BudgetPage', {BUDGET_ELEMENT : newBudget, BUDGET_TAB : el})
     }
 
     render(){
@@ -148,7 +160,9 @@ export default class HomePage extends Component {
 
                 <AddBudgetModal 
                 exitModalCB={this.toggleModalActive} 
-                isActive={this.state.isModalActive}/>
+                isActive={this.state.isModalActive}
+                getNewBudgetNameCB={this.getNewBudgetName}
+                createNewBudgetCB={this.createNewBudget}/>
 
                 <BudgetElementMenu 
                 isActive={this.state.isBudgetMenuActive}

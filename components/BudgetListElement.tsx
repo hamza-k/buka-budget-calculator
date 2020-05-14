@@ -43,7 +43,7 @@ class BudgetListElement extends Component {
         if (this.state.dataElement.budget_name != "") {
             return [{fontWeight: "bold", fontStyle: "italic"}, this.state.dataElement.budget_name,]
         } else {
-            return [{textTransform: "uppercase"}, "No name here"]
+            return [{ fontStyle: "italic" , opacity : 0.5}, "No name here"]
         }
     }
 

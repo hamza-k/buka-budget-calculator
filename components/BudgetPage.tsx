@@ -16,14 +16,16 @@ export default class BudgetPage extends Component {
             budgetList : budgetDB.budget_list,
             activeBudget : this.props.navigation.state.params.BUDGET_ELEMENT,
             activeTab : this.props.navigation.state.params.BUDGET_TAB,
-            calculatorOutput : "0"
+            latestBudgetItems : [],
+            calculatorOutput : "0",
+            isReadyToClearOutput : true
         }
     }
 
     // Navigation
     static navigationOptions = {
         headerShown: false,
-      };
+      }
 
     goOption = () => {
         const { navigate } = this.props.navigation;
@@ -32,6 +34,11 @@ export default class BudgetPage extends Component {
     goHome = () => {
         const { navigate } = this.props.navigation;
         navigate('HomePage')
+    }
+
+    UNSAFE_componentWillMount(){
+        let result_fetchCalcItem = this.state.activeBudget.budget_items.slice(-3) || []
+        this.state.latestBudgetItems = result_fetchCalcItem
     }
 
     // Header
@@ -58,8 +65,13 @@ export default class BudgetPage extends Component {
 
     // Calculator
     setCalcInput = (el) => {
-        if (this.state.calculatorOutput == '0' || this.state.calculatorOutput == 'Error') {
-            this.setState({calculatorOutput : el})
+        if (this.state.calculatorOutput == '0' 
+        || this.state.calculatorOutput == 'Error'
+        || this.state.isReadyToClearOutput) {
+            this.setState({
+                calculatorOutput : el,
+                isReadyToClearOutput : false
+                })
         } else {
             this.setState({calculatorOutput : this.state.calculatorOutput + el})
         }
@@ -78,7 +90,10 @@ export default class BudgetPage extends Component {
             outputArray.pop()
         }
         outputArray.push(el)
-        this.setState({calculatorOutput : outputArray.join('')})
+        this.setState({
+            calculatorOutput : outputArray.join(''),
+            isReadyToClearOutput: false
+        })
 
     }
     setInvertOutput = () => {
@@ -88,27 +103,42 @@ export default class BudgetPage extends Component {
         } else {
             outputArray.unshift('-')
         }
-        this.setState({calculatorOutput : outputArray.join('')})
+        this.setState({
+            calculatorOutput : outputArray.join(''),
+            isReadyToClearOutput: false
+        })
     }
     setEraseOutput = () => {
-        this.setState({calculatorOutput : '0'})
+        this.setState({
+            calculatorOutput : '0',
+            isReadyToClearOutput: true
+        })
     }
     setEvalPercentage = () => {
         if (this.state.calculatorOutput / 100 != NaN){
-            this.setState({calculatorOutput : (this.state.calculatorOutput / 100).toString()})
+            this.setState({
+                calculatorOutput : (this.state.calculatorOutput / 100).toString(),
+                isReadyToClearOutput: true
+                })
         } else {
-            this.setState({calculatorOutput : "Error"})
+            this.setState({
+                calculatorOutput : "Error",
+                isReadyToClearOutput: true
+            })
         }
     }
     setEvalOutput = () => {
-        this.setState({calculatorOutput : eval(this.state.calculatorOutput).toString()})
+        this.setState({
+            calculatorOutput : eval(this.state.calculatorOutput).toString(),
+            isReadyToClearOutput: true
+        })
     }
 
     // Latest Item (Calculator Page)
     fetchBudgetLatestItems = () => {
         let result_fetchCalcItem = this.state.activeBudget.budget_items.slice(-4)
-        // ! \\ display absolutly 3/4 latest items
-        
+        this.setState({latestBudgetItems : result_fetchCalcItem})
+        console.log(this.state.latestBudgetItems)
     }
     
 
@@ -146,7 +176,8 @@ export default class BudgetPage extends Component {
                     doInvertOutput={this.setInvertOutput}
                     doEraseOutput={this.setEraseOutput}
                     doEvalPercentage={this.setEvalPercentage}
-                    doEvalOutput={this.setEvalOutput}/>
+                    doEvalOutput={this.setEvalOutput}
+                    latestBudgetItems={this.state.latestBudgetItems}/>
 
                     <ChecklistPage 
                     isActive={this.state.activeTab == "checklist"}
