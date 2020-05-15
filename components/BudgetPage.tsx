@@ -6,6 +6,8 @@ import BudgetTabs from './BudgetTabs'
 import BudgetHeader from './BudgetHeader'
 import CalculatorPage from './CalculatorPage';
 import ChecklistPage from './ChecklistPage';
+import AddItemModal from './AddItemModal'
+import ItemElementMenu from './ItemElementMenu'
 
 import budgetDB from '../assets/budget_db.json'
 
@@ -18,7 +20,12 @@ export default class BudgetPage extends Component {
             activeTab : this.props.navigation.state.params.BUDGET_TAB,
             latestBudgetItems : [],
             calculatorOutput : "0",
-            isReadyToClearOutput : true
+            isReadyToClearOutput : true,
+            newItemName : "",
+            newItemPrice : 0.00,
+            isAddItemModalActive : false,
+            activeItem : {},
+            isItemElementMenuActive : false
         }
     }
 
@@ -35,7 +42,6 @@ export default class BudgetPage extends Component {
         const { navigate } = this.props.navigation;
         navigate('HomePage')
     }
-
     UNSAFE_componentWillMount(){
         let result_fetchCalcItem = this.state.activeBudget.budget_items.slice(-3) || []
         this.state.latestBudgetItems = result_fetchCalcItem
@@ -128,11 +134,32 @@ export default class BudgetPage extends Component {
         }
     }
     setEvalOutput = () => {
+
+        let output = Math.round(eval(this.state.calculatorOutput), 2)
+        let newItem = {
+            "item_id" : Math.round(Math.random() * 1000000),
+            "item_name" : "",
+            "item_price" : output,
+            "item_checked" : false
+        }
+        let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
+        let newActiveBudget = this.state.activeBudget
+        newActiveBudget.budget_items.push(newItem)
+        let newBudgetList = this.state.budgetList
+        newBudgetList[indexActiveBudget] = newActiveBudget
+
+        let result_fetchCalcItem = newActiveBudget.budget_items.slice(-3) || []
+
         this.setState({
-            calculatorOutput : eval(this.state.calculatorOutput).toString(),
-            isReadyToClearOutput: true
+            calculatorOutput : output.toString(),
+            isReadyToClearOutput: true,
+            activeBudget : newActiveBudget,
+            budgetList : newBudgetList,
+            latestBudgetItems : result_fetchCalcItem
         })
     }
+
+
 
     // Latest Item (Calculator Page)
     fetchBudgetLatestItems = () => {
@@ -140,8 +167,85 @@ export default class BudgetPage extends Component {
         this.setState({latestBudgetItems : result_fetchCalcItem})
         console.log(this.state.latestBudgetItems)
     }
-    
 
+    // CRUD
+    ///// Update the whole budget list
+    getNewItemName = el => {
+        this.setState({
+            newItemName : el
+        })
+    }
+    getNewItemPrice = el => {
+        let newPrice = eval(el)
+        this.setState({
+            newItemPrice : Math.round(newPrice * 100) / 100
+        })
+    }
+    createNewItem = () => {
+        let newItem = {
+            "item_id" : Math.round(Math.random() * 1000000),
+            "item_name" : this.state.newItemName,
+            "item_price" : this.state.newItemPrice,
+            "item_checked" : false
+        }
+        let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
+        let newActiveBudget = this.state.activeBudget
+        newActiveBudget.budget_items.push(newItem)
+        let newBudgetList = this.state.budgetList
+        newBudgetList[indexActiveBudget] = newActiveBudget
+
+        let result_fetchCalcItem = newActiveBudget.budget_items.slice(-3) || []
+
+        this.setState({
+            isAddItemModalActive: false,
+            activeBudget : newActiveBudget,
+            budgetList : newBudgetList,
+            latestBudgetItems : result_fetchCalcItem,
+            newItemName : "",
+            newItemPrice : 0.0
+        })
+    }
+    GiveCheckOnIt = el => {
+        el.item_checked = !el.item_checked
+
+        let newActiveBudget = this.state.activeBudget
+        let indexActiveItem = newActiveBudget.budget_items.findIndex(e => e.item_id == el.item_id)
+        newActiveBudget.budget_items[indexActiveItem] = el
+
+        let newBudgetList = this.state.budgetList
+        let indexActiveBudget = newBudgetList.findIndex(e => e.budget_id == newActiveBudget.budget_id)
+        newBudgetList[indexActiveBudget] = newActiveBudget
+        this.setState({
+            activeBudget : newActiveBudget,
+            budgetList : newBudgetList
+        })
+        console.log(newBudgetList)
+    }
+
+    // Modals
+    ///// Open Add Item Modal
+    openAddItemModal = () => {
+        this.setState({
+            isAddItemModalActive : true
+        })
+    }
+    closeAddItemModal = () => {
+        this.setState({
+            isAddItemModalActive : false
+        })
+    }
+    OpenItemMenu = el => {
+        this.setState({
+            isItemElementMenuActive : true,
+            activeItem : el
+        })
+    }
+    exitItemMenu = () => {
+        this.setState({
+            isItemElementMenuActive : false
+        })
+    }
+    
     render(){
         const { navigate } = this.props.navigation;
         return (
@@ -181,9 +285,28 @@ export default class BudgetPage extends Component {
 
                     <ChecklistPage 
                     isActive={this.state.activeTab == "checklist"}
-                    budget={this.state.activeBudget}/>
+                    budget={this.state.activeBudget}
+                    openAddItemModalCB={this.openAddItemModal}
+                    getNewItemPriceCB={this.getNewItemPrice}
+                    openItemMenuCB={this.OpenItemMenu}
+                    GiveCheckOnItCB={this.GiveCheckOnIt}/>
 
                 </View>
+
+                <AddItemModal 
+                isActive={this.state.isAddItemModalActive}
+                closeAddItemModalCB={this.closeAddItemModal}
+                createNewItemCB={this.createNewItem}
+                getNewItemNameCB={this.getNewItemName}
+                getNewItemPriceCB={this.getNewItemPrice}
+                createNewItemCB={this.createNewItem}
+                defaultNewNameValue={this.state.newItemName}
+                defaultNewPriceValue={this.state.newItemPrice}/>
+
+                <ItemElementMenu
+                isActive={this.state.isItemElementMenuActive}
+                itemElement={this.state.activeItem}
+                exitModalCB={this.exitItemMenu}/>
             </View>
         )
     }

@@ -31,66 +31,6 @@
                     "item_name" : "Flight bill",
                     "item_price" : 650,
                     "item_checked" : true
-                },
-                {
-                    "item_id" : 76543,
-                    "item_name" : "Car location",
-                    "item_price" : 390,
-                    "item_checked" : false
-                },
-                {
-                    "item_id" : 24567,
-                    "item_name" : "VISA",
-                    "item_price" : 150,
-                    "item_checked" : true
-                },
-                {
-                    "item_id" : 76535,
-                    "item_name" : "Flight bill",
-                    "item_price" : 650,
-                    "item_checked" : true
-                },
-                {
-                    "item_id" : 287535,
-                    "item_name" : "Car location",
-                    "item_price" : 390,
-                    "item_checked" : false
-                },
-                {
-                    "item_id" : 9954345,
-                    "item_name" : "VISA",
-                    "item_price" : 150,
-                    "item_checked" : true
-                },
-                {
-                    "item_id" : 2457887,
-                    "item_name" : "Flight bill",
-                    "item_price" : 650,
-                    "item_checked" : true
-                },
-                {
-                    "item_id" : 24686,
-                    "item_name" : "Car location",
-                    "item_price" : 390,
-                    "item_checked" : false
-                },
-                {
-                    "item_id" : 2478754,
-                    "item_name" : "VISA",
-                    "item_price" : 150,
-                    "item_checked" : true
-                },
-                {
-                    "item_id" : 2345677,
-                    "item_name" : "Flight bill",
-                    "item_price" : 650,
-                    "item_checked" : true
-                },
-                {
-                    "item_id" : 24677,
-                    "item_name" : "Car location",
-                    "item_price" : 390,
-                    "item_checked" : false
                 }
             ]
         },

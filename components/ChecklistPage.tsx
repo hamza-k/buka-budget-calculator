@@ -1,10 +1,16 @@
 import React from 'react'
-import {View, Text, ScrollView, StyleSheet, Dimensions} from 'react-native'
+import {View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity} from 'react-native'
 import { Button } from 'react-native-elements';
 import MCIicon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Eicon from 'react-native-vector-icons/Entypo';
 
-const ChecklistPage = ({isActive, budget}) =>  (
+const ChecklistPage = ({
+    isActive, 
+    budget, 
+    openAddItemModalCB,
+    openItemMenuCB,
+    GiveCheckOnItCB
+    }) =>  (
     <View style={[ style.container, { left: (isActive) ? 0 : "100%"}]}>
         <View style={[style.emptyListContainer, {
             height: (budget.budget_items.length == 0) ? "100%" : 0, 
@@ -24,7 +30,11 @@ const ChecklistPage = ({isActive, budget}) =>  (
             {
                 budget.budget_items.map(element => {
                     return (
-                        <View key={element.item_id} style={[style.checklistItemContainer, {
+                        <TouchableOpacity 
+                        onPress={() => GiveCheckOnItCB(element)} 
+                        onLongPress={() => openItemMenuCB(element)} 
+                        activeOpacity={1} key={element.item_id} 
+                        style={[style.checklistItemContainer, {
                             opacity : (element.item_checked) ? 0.5 : 1.0
                         }]}>
                             <MCIicon
@@ -40,7 +50,7 @@ const ChecklistPage = ({isActive, budget}) =>  (
                                 </Text>
                                 <Text style={[style.checklistItemText, {fontStyle: "italic"}]}>{element.item_price} €</Text>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     )
                 })
             }
@@ -58,6 +68,7 @@ const ChecklistPage = ({isActive, budget}) =>  (
         title="  Add a new item"
         titleStyle={{fontSize: 20}}
         buttonStyle={{width: "100%", padding: 15, backgroundColor: "#303030"}}
+        onPress={() => openAddItemModalCB()}
         />
     </View>
     </View>
@@ -75,7 +86,7 @@ const style = StyleSheet.create({
         width: "100%"
     },
     checklistItemContainer : {
-        backgroundColor: "#202020",
+        backgroundColor : "#202020",
         width: "100%",
         flexDirection: "row",
         padding: 20,
