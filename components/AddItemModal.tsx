@@ -33,21 +33,24 @@ const AddItemModal = ({
             inputStyle={{fontSize: 20, color: "#fbfbfb"}}
             labelStyle={{fontStyle: "italic"}}
             onChangeText={value => getNewItemNameCB(value)}/>
-            <Input
-            placeholder='And how much does it cost ?'
-            keyboardType = 'numeric'
-            value={(defaultNewPriceValue != 0.0) ? defaultNewPriceValue : 0}
-            leftIcon={
-                <Icon
-                name='chevron-right'
-                size={20}
-                color='#fbfbfb'
-                />
-            }
-            containerStyle={{marginBottom: 30}}
-            inputStyle={{fontSize: 20, color: "#fbfbfb"}}
-            labelStyle={{fontStyle: "italic"}}
-            onChangeText={value => getNewItemPriceCB(value)}/>
+            <View style={{flexDirection: "row"}}>
+                <Input
+                placeholder='And how much does it cost ?'
+                keyboardType = 'decimal-pad'
+                value={(defaultNewPriceValue != 0) ? defaultNewPriceValue.toString() : ""}
+                leftIcon={
+                    <Icon
+                    name='chevron-right'
+                    size={20}
+                    color='#fbfbfb'
+                    />
+                }
+                containerStyle={{marginBottom: 30, width: "75%"}}
+                inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+                labelStyle={{fontStyle: "italic"}}
+                onChangeText={value => getNewItemPriceCB(value)}/>
+                <Text style={{color: "#fbfbfb", fontSize: 20, paddingTop: 15}}>€</Text>
+            </View>
             <View style={style.buttonsContainer}>
                     <View style={style.buttonItem}>
                         <Button

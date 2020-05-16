@@ -32,7 +32,7 @@ export default class OptionPage extends Component {
                 goOptionCB={this.goOption} 
                 goHomeCB={this.goHome} />
                 
-                <Text>Option Page</Text>
+                <Text>Options are coming, baby</Text>
             </View>
         )
     }

@@ -80,7 +80,8 @@ export default class HomePage extends Component {
     enterBudgetEditModaleActive = () => {
         this.setState({
             isBudgetMenuActive : false,
-            isBudgetEditModaleActive : true
+            isBudgetEditModaleActive : true,
+            newBudgetName : this.state.activeBudget.budget_name
         })
     }
     exitBudgetEditModale = () => {
@@ -112,10 +113,21 @@ export default class HomePage extends Component {
         }
     }
     changeBudgetNameData = el => {
-        let newCurrentBudget = this.state.activeBudget
-        newCurrentBudget.budget_name = el
+
         this.setState({
-            activeBudget : newCurrentBudget
+            newBudgetName : el
+        })
+    }
+    editBudgetName = () => {
+        let newActiveBudget = this.state.activeBudget
+        newActiveBudget.budget_name = this.state.newBudgetName
+        let newBudgetList = this.state.budgetList
+        let indexActiveBudget = this.state.budgetList.findIndex(el => el.budget_id == this.state.activeBudget.budget_id)
+        newBudgetList[indexActiveBudget] = newActiveBudget
+        this.setState({
+            isBudgetEditModaleActive : false,
+            budgetList : newBudgetList,
+            newBudgetName : ""
         })
     }
     getNewBudgetName = el => {
@@ -179,9 +191,9 @@ export default class HomePage extends Component {
 
                 <BudgetEditConfirmationModal
                 isActive={this.state.isBudgetEditModaleActive} 
-                budgetElement={this.state.activeBudget}
+                budgetElementValue={this.state.newBudgetName}
                 exitModalCB={this.exitBudgetEditModale}
-                toConfirmEditCB={this.editBudget}
+                toConfirmEditCB={this.editBudgetName}
                 EditBudgetNameData={this.changeBudgetNameData}/>
 
             </View>

@@ -3,7 +3,7 @@ import {View, StyleSheet, Text, TextInput, TouchableWithoutFeedback} from 'react
 import { Button, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const BudgetEditConfirmationModal = ({isActive, budgetElement, exitModalCB, toConfirmEditCB, EditBudgetNameData}) => (
+const BudgetEditConfirmationModal = ({isActive, budgetElementValue, exitModalCB, toConfirmEditCB, EditBudgetNameData}) => (
     <TouchableWithoutFeedback
     style={[style.container, {height: (isActive) ? "100%" : 0}]}
     onPress={() => exitModalCB()}>
@@ -22,7 +22,7 @@ const BudgetEditConfirmationModal = ({isActive, budgetElement, exitModalCB, toCo
                 containerStyle={{marginBottom: 30}}
                 inputStyle={{fontSize: 20, color: "#fbfbfb"}}
                 labelStyle={{fontStyle: "italic"}}
-                value={budgetElement.budget_name}
+                value={budgetElementValue}
                 onChangeText={value => EditBudgetNameData(value)}/>
                 <View style={style.buttonsContainer}>
 
@@ -39,6 +39,21 @@ const BudgetEditConfirmationModal = ({isActive, budgetElement, exitModalCB, toCo
                         titleStyle={{fontSize: 20}}
                         buttonStyle={style.buttonStyle}
                         title="   Submit"
+                        onPress={() => toConfirmEditCB()}/>
+                    </View>
+                    <View style={style.buttonItem}>
+                        <Button
+                        icon={
+                            <Icon
+                            name="cross"
+                            size={20}
+                            color="white"
+                            />
+                        }
+                        iconLeft
+                        titleStyle={{fontSize: 20}}
+                        buttonStyle={style.buttonStyle}
+                        title="   Cancel"
                         onPress={() => exitModalCB()}/>
                     </View>
                 </View>

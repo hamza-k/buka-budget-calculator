@@ -3,31 +3,60 @@ import {View, StyleSheet, Text, TextInput, TouchableWithoutFeedback} from 'react
 import { Button, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const ItemElementMenu = ({
+const ItemEditConfirmationModal = ({
     isActive, 
-    itemElement, 
+    itemNameValue, 
+    itemPriceValue, 
     exitModalCB, 
-    toConfirmDeleteCB, 
-    toConfirmeEditCB
+    toConfirmEditCB, 
+    EditItemNameData, 
+    EditItemPriceData
     }) => (
     <TouchableWithoutFeedback
     style={[style.container, {height: (isActive) ? "100%" : 0}]}
     onPress={() => exitModalCB()}>
     <View style={[style.container, {height: (isActive) ? "100%" : 0}]}>
         <TouchableWithoutFeedback>
-            <View style={[style.modal, {bottom : (isActive) ? 0 : -350}]}>
-                <Text style={[style.title, {
-                    fontWeight : (itemElement.item_name != "") ? "bold" : "normal",
-                    fontStyle : (itemElement.item_name != "") ? "normal" : "italic",
-                    opacity : (itemElement.item_name != "") ? 1.0 : 0.5
-                }]}>{(itemElement.item_name != "") ? itemElement.item_name : "No name here"}</Text>
-                <Text style={{color: "#fbfbfb", fontSize: 30, alignSelf : "center", marginBottom: 30, fontStyle: 'italic', fontWeight: "bold"}}>{itemElement.item_price} €</Text>
+            <View style={[style.modal, {bottom : (isActive) ? 0 : -400}]}>
+                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15, marginLeft: 10}}>Enter a name for your item :</Text>
+                <Input
+                leftIcon={
+                    <Icon
+                    name='chevron-right'
+                    size={20}
+                    color='#fbfbfb'
+                    />
+                }
+                containerStyle={{marginBottom: 30}}
+                inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+                labelStyle={{fontStyle: "italic"}}
+                value={itemNameValue}
+                onChangeText={value => EditItemNameData(value)}/>
+                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15, marginLeft: 10}}>Enter its price :</Text>
+                <View style={{flexDirection: "row"}}>
+                    <Input
+                    leftIcon={
+                        <Icon
+                        name='chevron-right'
+                        size={20}
+                        color='#fbfbfb'
+                        />
+                    }
+                    containerStyle={{marginBottom: 30, width: "75%"}}
+                    inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+                    labelStyle={{fontStyle: "italic"}}
+                    keyboardType = 'decimal-pad'
+                    value={(itemPriceValue != 0) ? itemPriceValue.toString() : ""}
+                    onChangeText={value => EditItemPriceData(value)}/>
+                    <Text style={{color: "#fbfbfb", fontSize: 20, paddingTop: 15}}>€</Text>
+                </View>
                 <View style={style.buttonsContainer}>
+
                     <View style={style.buttonItem}>
                         <Button
                         icon={
                             <Icon
-                            name="pencil"
+                            name="check"
                             size={20}
                             color="white"
                             />
@@ -35,14 +64,14 @@ const ItemElementMenu = ({
                         iconLeft
                         titleStyle={{fontSize: 20}}
                         buttonStyle={style.buttonStyle}
-                        title="   Edit name"
-                        onPress={() => toConfirmeEditCB()}/>
+                        title="   Submit"
+                        onPress={() => toConfirmEditCB()}/>
                     </View>
                     <View style={style.buttonItem}>
                         <Button
                         icon={
                             <Icon
-                            name="trash"
+                            name="cross"
                             size={20}
                             color="white"
                             />
@@ -50,8 +79,8 @@ const ItemElementMenu = ({
                         iconLeft
                         titleStyle={{fontSize: 20}}
                         buttonStyle={style.buttonStyle}
-                        title="   Delete"
-                        onPress={() => toConfirmDeleteCB()}/>
+                        title="   Cancel"
+                        onPress={() => exitModalCB()}/>
                     </View>
                 </View>
             </View>
@@ -60,7 +89,7 @@ const ItemElementMenu = ({
     </TouchableWithoutFeedback>
 )
 
-export default ItemElementMenu
+export default ItemEditConfirmationModal
 
 const style = StyleSheet.create({
     container : {
@@ -82,7 +111,7 @@ const style = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         width: "100%",
-        marginBottom: 10
+        marginBottom: 20
     },
     buttonsContainer : {
         flexDirection: "row",

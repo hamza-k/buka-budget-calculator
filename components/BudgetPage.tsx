@@ -8,6 +8,8 @@ import CalculatorPage from './CalculatorPage';
 import ChecklistPage from './ChecklistPage';
 import AddItemModal from './AddItemModal'
 import ItemElementMenu from './ItemElementMenu'
+import ItemDeleteConfirmationModal from './ItemDeleteConfirmationModal'
+import ItemEditConfirmationModal from './ItemEditConfirmationModal'
 
 import budgetDB from '../assets/budget_db.json'
 
@@ -25,7 +27,9 @@ export default class BudgetPage extends Component {
             newItemPrice : 0.00,
             isAddItemModalActive : false,
             activeItem : {},
-            isItemElementMenuActive : false
+            isItemElementMenuActive : false,
+            isDeleteModalActive : false,
+            isEditModalActive : false,
         }
     }
 
@@ -55,17 +59,20 @@ export default class BudgetPage extends Component {
     }
     getTotalPrice = () => {
         let totalPrice = 0
-        this.state.activeBudget.budget_items.forEach(item => {
-            totalPrice += item.item_price
-        })
+        if (this.state.activeBudget.budget_items != []) {
+            this.state.activeBudget.budget_items.forEach(item => {
+                totalPrice += item.item_price
+            })
+        }
         return totalPrice
     }
     getTotalCheckedPrice = () => {
         let totalCheckedPrice = 0
-        this.state.activeBudget.budget_items.forEach(item => {
-            
-            if (item.item_checked) totalCheckedPrice += item.item_price
-        })
+        if (this.state.activeBudget.budget_items != []) {
+            this.state.activeBudget.budget_items.forEach(item => {
+                if (item.item_checked) totalCheckedPrice += item.item_price
+            })
+        }
         return totalCheckedPrice
     }
 
@@ -176,7 +183,7 @@ export default class BudgetPage extends Component {
         })
     }
     getNewItemPrice = el => {
-        let newPrice = eval(el)
+        let newPrice = parseFloat(el)
         this.setState({
             newItemPrice : Math.round(newPrice * 100) / 100
         })
@@ -219,7 +226,51 @@ export default class BudgetPage extends Component {
             activeBudget : newActiveBudget,
             budgetList : newBudgetList
         })
-        console.log(newBudgetList)
+    }
+    toDeleteItem = el => {
+        let newActiveBudget = this.state.activeBudget
+        newActiveBudget.budget_items = newActiveBudget.budget_items.filter (e => e.item_id != el.item_id)
+        let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
+        let newBudgetList = this.state.budgetList
+        newBudgetList[indexActiveBudget] = newActiveBudget
+        let result_fetchCalcItem = newActiveBudget.budget_items.slice(-3) || []
+        this.setState({
+            activeBudget : newActiveBudget,
+            latestBudgetItems : result_fetchCalcItem,
+            budgetList : newBudgetList,
+            isDeleteModalActive: false
+        })
+    }
+    setReadyNewItemName = el => {
+        this.setState({
+            newItemName : el
+        })
+    }
+    setReadyNewItemPrice = el => {
+        this.setState({
+            newItemPrice : (el != "") ? parseFloat(el) : 0.00
+        })
+    }
+    toEditItem = () => {
+        let newActiveBudget = this.state.activeBudget
+        let newActiveItem = this.state.activeItem
+        newActiveItem.item_name = this.state.newItemName
+        newActiveItem.item_price = this.state.newItemPrice
+        let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
+        let newBudgetList = this.state.budgetList
+        newBudgetList[indexActiveBudget] = newActiveBudget
+
+        let result_fetchCalcItem = newActiveBudget.budget_items.slice(-3) || []
+
+        this.setState({
+            activeBudget : newActiveBudget,
+            latestBudgetItems : result_fetchCalcItem,
+            budgetList : newBudgetList,
+            isEditModalActive : false,
+            newItemName : "",
+            newItemPrice : 0.00,
+
+        })
     }
 
     // Modals
@@ -245,6 +296,35 @@ export default class BudgetPage extends Component {
             isItemElementMenuActive : false
         })
     }
+    toConfirmDeleteItem = () => {
+        this.setState({
+            isDeleteModalActive : true,
+            isItemElementMenuActive : false
+
+        })
+    }
+    exitItemDeleteModal = () => {
+        this.setState({
+            isDeleteModalActive : false
+        })
+    }
+    openItemEditModal = () => {
+        this.setState({
+            isEditModalActive : true,
+            isItemElementMenuActive : false,
+            newItemName : this.state.activeItem.item_name,
+            newItemPrice : this.state.activeItem.item_price
+        })
+        console.log(this.state.activeItem.item_price)
+    }
+    exitItemEditModal = () => {
+        this.setState({
+            isEditModalActive : false,
+            newItemName : "",
+            newItemPrice : 0.00
+        })
+    }
+
     
     render(){
         const { navigate } = this.props.navigation;
@@ -265,7 +345,8 @@ export default class BudgetPage extends Component {
                     <BudgetHeader 
                     budgetName={this.state.activeBudget.budget_name}
                     totalPrice={this.getTotalPrice()}
-                    totalCheckedPrice={this.getTotalCheckedPrice()}/>
+                    totalCheckedPrice={this.getTotalCheckedPrice()}
+                    displayType={this.state.activeTab}/>
 
                 </View>
 
@@ -306,7 +387,25 @@ export default class BudgetPage extends Component {
                 <ItemElementMenu
                 isActive={this.state.isItemElementMenuActive}
                 itemElement={this.state.activeItem}
-                exitModalCB={this.exitItemMenu}/>
+                exitModalCB={this.exitItemMenu}
+                toConfirmDeleteCB={this.toConfirmDeleteItem}
+                toConfirmeEditCB={this.openItemEditModal}/>
+
+                <ItemDeleteConfirmationModal
+                isActive={this.state.isDeleteModalActive}
+                itemElement={this.state.activeItem}
+                exitModalCB={this.exitItemDeleteModal}
+                toDeleteCB={this.toDeleteItem}/>
+
+                <ItemEditConfirmationModal
+                isActive={this.state.isEditModalActive}
+                exitModalCB={this.exitItemEditModal}
+                itemNameValue={this.state.newItemName}
+                itemPriceValue={this.state.newItemPrice}
+                EditItemNameData={this.setReadyNewItemName}
+                EditItemPriceData={this.setReadyNewItemPrice}
+                toConfirmEditCB={this.toEditItem}/>
+
             </View>
         )
     }

@@ -3,12 +3,11 @@ import {View, StyleSheet, Text, TextInput, TouchableWithoutFeedback} from 'react
 import { Button, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const ItemElementMenu = ({
+const ItemDeleteConfirmationModal = ({
     isActive, 
     itemElement, 
     exitModalCB, 
-    toConfirmDeleteCB, 
-    toConfirmeEditCB
+    toDeleteCB
     }) => (
     <TouchableWithoutFeedback
     style={[style.container, {height: (isActive) ? "100%" : 0}]}
@@ -16,8 +15,9 @@ const ItemElementMenu = ({
     <View style={[style.container, {height: (isActive) ? "100%" : 0}]}>
         <TouchableWithoutFeedback>
             <View style={[style.modal, {bottom : (isActive) ? 0 : -350}]}>
+                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15}}>Are you sure you want to delete this budget :</Text>
                 <Text style={[style.title, {
-                    fontWeight : (itemElement.item_name != "") ? "bold" : "normal",
+                    fontWeight: (itemElement.item_name != "") ? "bold" : "normal",
                     fontStyle : (itemElement.item_name != "") ? "normal" : "italic",
                     opacity : (itemElement.item_name != "") ? 1.0 : 0.5
                 }]}>{(itemElement.item_name != "") ? itemElement.item_name : "No name here"}</Text>
@@ -27,7 +27,7 @@ const ItemElementMenu = ({
                         <Button
                         icon={
                             <Icon
-                            name="pencil"
+                            name="check"
                             size={20}
                             color="white"
                             />
@@ -35,14 +35,14 @@ const ItemElementMenu = ({
                         iconLeft
                         titleStyle={{fontSize: 20}}
                         buttonStyle={style.buttonStyle}
-                        title="   Edit name"
-                        onPress={() => toConfirmeEditCB()}/>
+                        title="   Confirm"
+                        onPress={() => toDeleteCB(itemElement)}/>
                     </View>
                     <View style={style.buttonItem}>
                         <Button
                         icon={
                             <Icon
-                            name="trash"
+                            name="cross"
                             size={20}
                             color="white"
                             />
@@ -50,8 +50,8 @@ const ItemElementMenu = ({
                         iconLeft
                         titleStyle={{fontSize: 20}}
                         buttonStyle={style.buttonStyle}
-                        title="   Delete"
-                        onPress={() => toConfirmDeleteCB()}/>
+                        title="   Cancel"
+                        onPress={() => exitModalCB()}/>
                     </View>
                 </View>
             </View>
@@ -60,7 +60,7 @@ const ItemElementMenu = ({
     </TouchableWithoutFeedback>
 )
 
-export default ItemElementMenu
+export default ItemDeleteConfirmationModal
 
 const style = StyleSheet.create({
     container : {
@@ -82,7 +82,7 @@ const style = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         width: "100%",
-        marginBottom: 10
+        marginBottom: 20
     },
     buttonsContainer : {
         flexDirection: "row",

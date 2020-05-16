@@ -35,7 +35,7 @@ const ChecklistPage = ({
                         onLongPress={() => openItemMenuCB(element)} 
                         activeOpacity={1} key={element.item_id} 
                         style={[style.checklistItemContainer, {
-                            opacity : (element.item_checked) ? 0.5 : 1.0
+                            backgroundColor : (!element.item_checked) ? "#20202000" : "#202020FF"
                         }]}>
                             <MCIicon
                             name={(element.item_checked) ? 'checkbox-blank-circle' : 'checkbox-blank-circle-outline'}
@@ -86,7 +86,6 @@ const style = StyleSheet.create({
         width: "100%"
     },
     checklistItemContainer : {
-        backgroundColor : "#202020",
         width: "100%",
         flexDirection: "row",
         padding: 20,

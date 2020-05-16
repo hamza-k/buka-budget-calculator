@@ -1,15 +1,16 @@
 import React from 'react'
-import {Text, View, StyleSheet} from 'react-native'
+import {Text, View, StyleSheet, Image} from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo'
+import imgLogoHeader from '../assets/logo_header.png'
 
 
-const Header = ({title, isHome, goOptionCB, goHomeCB}) => (
+const Header = ({ isHome, goOptionCB, goHomeCB}) => (
     <View style={style.container}>
         <Icon 
         name="home" 
         style={[style.icon, {transform: [{translateX: (isHome) ? -40 : 0}]}]}
         onPress={() => goHomeCB()}/>
-        <Text style={style.title}>{title}</Text>
+        <Image source={imgLogoHeader} style={style.logo}/>
         <Icon 
         name="menu" 
         style={[style.icon, {transform: [{translateX: (!isHome) ? 40 : 0}]}]}
@@ -27,10 +28,9 @@ const style = StyleSheet.create({
         flexDirection : "row",
         justifyContent: "space-between"
     },
-    title : {
-        fontSize : 24,
-        color : "#fbfbfb",
-        fontWeight: "bold"
+    logo : {
+        height : 24,
+        width: 85
     },
     icon : {
         color: "#fbfbfb",

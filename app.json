@@ -1,17 +1,35 @@
 {
-  "name": "hk-budget-calculator",
-  "displayName": "hk-budget-calculator",
+  "name": "BuKa",
+  "displayName": "buka",
   "expo": {
-    "name": "hk-budget-calculator",
-    "slug": "hk-budget-calculator",
+    "name": "BuKa",
+    "icon": "assets/logo.png",
+    "slug": "buka-budget-calculator",
     "version": "1.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.hkcomp.bukabudgetcalculator",
+      "splash": {
+        "image": "assets/loadscreen/logo_05.png",
+        "resizeMode": "cover"
+      }
+    },
+    "android": {
+      "package": "com.hkcomp.bukabudgetcalculator",
+      "splash": {
+        "mdpi": "assets/loadscreen/logo_01.png",
+        "hdpi": "assets/loadscreen/logo_01.png",
+        "xhdpi": "assets/loadscreen/logo_03.png",
+        "xxhdpi": "assets/loadscreen/logo_05.png",
+        "xxxhdpi": "assets/loadscreen/logo_07.png",
+        "resizeMode": "cover"
+      }
+    }
   }
 }
