@@ -37,7 +37,8 @@ const style = StyleSheet.create({
     budgetPriceLeft : {
         color: "#fbfbfb",
         textAlign: "right",
-        fontSize: 75
+        fontSize: 60,
+        fontWeight: "bold"
     },
     budgetPriceTotal : {
         fontSize : 22,

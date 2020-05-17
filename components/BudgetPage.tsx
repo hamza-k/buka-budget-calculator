@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, Button, StyleSheet} from 'react-native'
+import {View, Text, Button, StyleSheet, AsyncStorage} from 'react-native'
 import StatusBarComp from './StatusBarComp';
 import Header from './Header';
 import BudgetTabs from './BudgetTabs'
@@ -11,13 +11,14 @@ import ItemElementMenu from './ItemElementMenu'
 import ItemDeleteConfirmationModal from './ItemDeleteConfirmationModal'
 import ItemEditConfirmationModal from './ItemEditConfirmationModal'
 
-import budgetDB from '../assets/budget_db.json'
+const storageKey = 'budget_list'
+
 
 export default class BudgetPage extends Component {
     constructor(props){
         super(props)
         this.state = {
-            budgetList : budgetDB.budget_list,
+            budgetList : this.props.navigation.state.params.BUDGET_LIST,
             activeBudget : this.props.navigation.state.params.BUDGET_ELEMENT,
             activeTab : this.props.navigation.state.params.BUDGET_TAB,
             latestBudgetItems : [],
@@ -36,7 +37,8 @@ export default class BudgetPage extends Component {
     // Navigation
     static navigationOptions = {
         headerShown: false,
-      }
+    }
+
 
     goOption = () => {
         const { navigate } = this.props.navigation;
@@ -44,11 +46,25 @@ export default class BudgetPage extends Component {
     }
     goHome = () => {
         const { navigate } = this.props.navigation;
-        navigate('HomePage')
+
+        navigate('HomePage', {
+            BUDGET_LIST : this.state.budgetList
+        })
     }
+
     UNSAFE_componentWillMount(){
         let result_fetchCalcItem = this.state.activeBudget.budget_items.slice(-3) || []
         this.state.latestBudgetItems = result_fetchCalcItem
+
+        AsyncStorage.getItem(storageKey).then(storedBudgetList => {
+            if(storedBudgetList){
+                this.setState({budgetList: JSON.parse(storedBudgetList)})
+            }
+        })
+    }
+
+    saveBudgetList = () => {
+        AsyncStorage.setItem(storageKey, JSON.stringify(this.state.budgetList))
     }
 
     // Header
@@ -78,8 +94,7 @@ export default class BudgetPage extends Component {
 
     // Calculator
     setCalcInput = (el) => {
-        if (this.state.calculatorOutput == '0' 
-        || this.state.calculatorOutput == 'Error'
+        if (this.state.calculatorOutput == 'Error'
         || this.state.isReadyToClearOutput) {
             this.setState({
                 calculatorOutput : el,
@@ -142,7 +157,7 @@ export default class BudgetPage extends Component {
     }
     setEvalOutput = () => {
 
-        let output = Math.round(eval(this.state.calculatorOutput), 2)
+        let output = Math.round(eval(this.state.calculatorOutput) * 100) / 100
         let newItem = {
             "item_id" : Math.round(Math.random() * 1000000),
             "item_name" : "",
@@ -163,7 +178,7 @@ export default class BudgetPage extends Component {
             activeBudget : newActiveBudget,
             budgetList : newBudgetList,
             latestBudgetItems : result_fetchCalcItem
-        })
+        }, () => this.saveBudgetList())
     }
 
 
@@ -184,9 +199,15 @@ export default class BudgetPage extends Component {
     }
     getNewItemPrice = el => {
         let newPrice = parseFloat(el)
-        this.setState({
-            newItemPrice : Math.round(newPrice * 100) / 100
-        })
+        if (isNaN(newPrice)){
+            this.setState({
+                newItemPrice : 0.00
+            })
+        } else {
+            this.setState({
+                newItemPrice : Math.round(newPrice * 100) / 100
+            })
+        }
     }
     createNewItem = () => {
         let newItem = {
@@ -210,7 +231,7 @@ export default class BudgetPage extends Component {
             latestBudgetItems : result_fetchCalcItem,
             newItemName : "",
             newItemPrice : 0.0
-        })
+        }, () => this.saveBudgetList())
     }
     GiveCheckOnIt = el => {
         el.item_checked = !el.item_checked
@@ -225,7 +246,7 @@ export default class BudgetPage extends Component {
         this.setState({
             activeBudget : newActiveBudget,
             budgetList : newBudgetList
-        })
+        }, () => this.saveBudgetList())
     }
     toDeleteItem = el => {
         let newActiveBudget = this.state.activeBudget
@@ -239,7 +260,7 @@ export default class BudgetPage extends Component {
             latestBudgetItems : result_fetchCalcItem,
             budgetList : newBudgetList,
             isDeleteModalActive: false
-        })
+        }, () => this.saveBudgetList())
     }
     setReadyNewItemName = el => {
         this.setState({
@@ -270,7 +291,7 @@ export default class BudgetPage extends Component {
             newItemName : "",
             newItemPrice : 0.00,
 
-        })
+        }, () => this.saveBudgetList())
     }
 
     // Modals

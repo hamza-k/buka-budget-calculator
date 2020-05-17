@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import StatusBarComp from './StatusBarComp';
 import Header from './Header';
-import {Text, View} from 'react-native'
+import {Text, View, StyleSheet} from 'react-native'
 
 export default class OptionPage extends Component {
     constructor(props){
@@ -25,15 +25,31 @@ export default class OptionPage extends Component {
 
     render(){
         return(
-            <View>
+            <View style={style.container}>
                 <StatusBarComp/>
 
                 <Header title="Budget Calculator" 
                 goOptionCB={this.goOption} 
                 goHomeCB={this.goHome} />
                 
-                <Text>Options are coming, baby</Text>
+                <Text style={style.text}>Options are coming, baby</Text>
             </View>
         )
     }
 }
+
+const style = StyleSheet.create({
+    container : {
+        backgroundColor: "#000000",
+        flex: 1
+    },
+    text : {
+        color: "#fbfbfb",
+        fontSize: 48,
+        opacity: 0.5,
+        fontWeight: "bold",
+        fontStyle: "italic",
+        textAlign: "center",
+        padding: 50
+    }
+})

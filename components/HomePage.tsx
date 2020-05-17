@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, AsyncStorage} from 'react-native'
 
 import StatusBarComp from './StatusBarComp';
 import Header from './Header';
@@ -11,14 +11,15 @@ import BudgetDeleteConfirmationModal from './BudgetDeleteConfirmationModal'
 import BudgetEditConfirmationModal from './BudgetEditConfirmationModal'
 
 import Icon from 'react-native-vector-icons/Entypo';
-import budgetDB from '../assets/budget_db.json'
+//import budgetDB from '../assets/budget_db.json'
+const storageKey = 'budget_list'
 
 export default class HomePage extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            budgetList : budgetDB.budget_list,
+            budgetList : [] || this.props.navigation.state.params.BUDGET_LIST,
             isModalActive : false,
             isBudgetMenuActive : false,
             isBudgetDeleteModaleActive : false,
@@ -30,6 +31,18 @@ export default class HomePage extends Component {
 
     static navigationOptions = {
         headerShown: false,
+    }
+
+    UNSAFE_componentWillMount(){
+        AsyncStorage.getItem(storageKey).then(storedBudgetList => {
+            if(storedBudgetList){
+                this.setState({budgetList: JSON.parse(storedBudgetList)})
+            }
+        })
+    }
+
+    saveBudgetList = () => {
+        AsyncStorage.setItem(storageKey, JSON.stringify(this.state.budgetList))
     }
 
     toggleModalActive = () => {
@@ -57,7 +70,11 @@ export default class HomePage extends Component {
     }
     goBudgetPage = (el) => {
         const { navigate } = this.props.navigation;
-        navigate('BudgetPage', {BUDGET_ELEMENT : el, BUDGET_TAB : "checklist"})
+        navigate('BudgetPage', {
+            BUDGET_ELEMENT : el, 
+            BUDGET_LIST : this.state.budgetList, 
+            BUDGET_TAB : "checklist"
+        })
     }
     enterBudgetDeleteModaleActive = () => {
         this.setState({
@@ -75,7 +92,7 @@ export default class HomePage extends Component {
         this.setState({
             budgetList : newBudgetList,
             isBudgetDeleteModaleActive: false
-        })
+        }, () => this.saveBudgetList())
     }
     enterBudgetEditModaleActive = () => {
         this.setState({
@@ -128,7 +145,7 @@ export default class HomePage extends Component {
             isBudgetEditModaleActive : false,
             budgetList : newBudgetList,
             newBudgetName : ""
-        })
+        }, () => this.saveBudgetList())
     }
     getNewBudgetName = el => {
         this.setState({
@@ -148,10 +165,10 @@ export default class HomePage extends Component {
             isModalActive : false,
             budgetList : newBudgetList,
             newBudgetName : ""
-        })
+        }, () => this.saveBudgetList())
 
         const { navigate } = this.props.navigation;
-        navigate('BudgetPage', {BUDGET_ELEMENT : newBudget, BUDGET_TAB : el})
+        navigate('BudgetPage', {BUDGET_ELEMENT : newBudget, BUDGET_TAB : el, BUDGET_LIST: this.state.budgetList})
     }
 
     render(){

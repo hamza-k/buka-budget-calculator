@@ -37,7 +37,7 @@ const AddItemModal = ({
                 <Input
                 placeholder='And how much does it cost ?'
                 keyboardType = 'decimal-pad'
-                value={(defaultNewPriceValue != 0) ? defaultNewPriceValue.toString() : ""}
+                value={(defaultNewPriceValue != 0) ? defaultNewPriceValue.toString() : "0"}
                 leftIcon={
                     <Icon
                     name='chevron-right'
