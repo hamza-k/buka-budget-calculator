@@ -56,8 +56,8 @@ class BudgetListElement extends Component {
                 <Text style={[style.title, this.getBudgetName()[0]]}>{this.getBudgetName()[1]}</Text>
                 <View style={{flexDirection : 'row', paddingTop: 10, alignItems : "flex-end", marginBottom: 20, marginHorizontal: 20}}>
                     <Text style={style.pricingTag}>Progress : </Text>
-                    <Text style={style.pricingCheckedTag}>{this.getTotalCheckedItem()} €</Text>
-                    <Text style={style.pricingTag}> / {this.getTotalItem()} €</Text>
+                    <Text style={style.pricingCheckedTag}>{Math.round(this.getTotalCheckedItem() * 100 ) / 100} €</Text>
+                    <Text style={style.pricingTag}> / {Math.round(this.getTotalItem() * 100 ) / 100} €</Text>
                 </View>
                 <ProgressBar itemList={dataElement.budget_items}/>
             </View>

@@ -6,8 +6,8 @@ const BudgetHeader = ({budgetName, totalPrice, totalCheckedPrice, displayType}) 
         return (
             <View style={style.container}>
                 <Text style={[style.budgetName, {opacity : (budgetName != "") ? 1 : 0.5}]}>{(budgetName != "") ? budgetName : "No budget name"}</Text>
-                <Text style={style.budgetPriceTotal}>Over {totalPrice} €</Text>
-                <Text style={style.budgetPriceLeft}>{totalCheckedPrice} €</Text>
+                <Text style={style.budgetPriceTotal}>Over {Math.round(totalPrice * 100) / 100} €</Text>
+                <Text style={style.budgetPriceLeft}>{Math.round(totalCheckedPrice * 100) / 100} €</Text>
             </View>
         )
     }
@@ -15,8 +15,8 @@ const BudgetHeader = ({budgetName, totalPrice, totalCheckedPrice, displayType}) 
         return (
             <View style={style.container}>
                 <Text style={[style.budgetName, {opacity : (budgetName != "") ? 1 : 0.5}]}>{(budgetName != "") ? budgetName : "No budget name"}</Text>
-                <Text style={style.budgetPriceTotal}>Checked {totalCheckedPrice} €</Text>
-                <Text style={style.budgetPriceLeft}>{totalPrice} €</Text>
+                <Text style={style.budgetPriceTotal}>Checked {Math.round(totalCheckedPrice * 100) / 100} €</Text>
+                <Text style={style.budgetPriceLeft}>{Math.round(totalPrice * 100) / 100} €</Text>
             </View>
         )
     }
