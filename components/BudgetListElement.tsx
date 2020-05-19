@@ -41,7 +41,7 @@ class BudgetListElement extends Component {
 
     getBudgetName = () => {
         if (this.state.dataElement.budget_name != "") {
-            return [{fontWeight: "bold", fontStyle: "italic"}, this.state.dataElement.budget_name,]
+            return [{fontWeight: "bold"}, this.state.dataElement.budget_name,]
         } else {
             return [{ fontStyle: "italic" , opacity : 0.5}, "No name here"]
         }
@@ -97,7 +97,8 @@ const style = StyleSheet.create({
     },
     pricingTag : {
         fontSize : 18,
-        color : "#3a3a3a"
+        color : "#3a3a3a",
+        fontStyle: "italic"
     },
     pricingCheckedTag : {
         fontSize : 22,

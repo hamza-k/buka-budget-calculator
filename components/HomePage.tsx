@@ -189,6 +189,7 @@ export default class HomePage extends Component {
 
                 <AddBudgetModal 
                 exitModalCB={this.toggleModalActive} 
+                fetchNewName={this.state.newBudgetName}
                 isActive={this.state.isModalActive}
                 getNewBudgetNameCB={this.getNewBudgetName}
                 createNewBudgetCB={this.createNewBudget}/>

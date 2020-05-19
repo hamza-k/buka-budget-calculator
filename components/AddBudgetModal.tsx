@@ -7,7 +7,8 @@ const AddBudgetModal = ({
     isActive, 
     exitModalCB,
     createNewBudgetCB,
-    getNewBudgetNameCB
+    getNewBudgetNameCB,
+    fetchNewName
     }) => (
     <TouchableWithoutFeedback
     style={[style.container, {height: (isActive) ? "100%" : 0}]}
@@ -28,6 +29,7 @@ const AddBudgetModal = ({
             containerStyle={{marginBottom: 30}}
             inputStyle={{fontSize: 20, color: "#3a3a3a"}}
             labelStyle={{fontStyle: "italic"}}
+            value={fetchNewName}
             onChangeText={value => getNewBudgetNameCB(value)}/>
             <Text style={style.title}>Let's start with</Text>
             <View style={{flexDirection: 'row', justifyContent: "space-evenly"}}>
