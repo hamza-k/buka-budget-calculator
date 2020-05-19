@@ -1,4 +1,4 @@
-# hk-budget-calculator
+# BuKa - Budget Calculator
 BuKa - Budget Calculator : budget managment app
 This project is powered with React Native and React Native Elements, and built using Expo
 
