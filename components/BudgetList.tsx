@@ -8,7 +8,7 @@ const BudgetList = ({dataList, setBudgetElementMenu, setBudgetPage}) => {
             {dataList.map(el => {
                 return (
                     <TouchableOpacity 
-                    activeOpacity={.8} 
+                    activeOpacity={1} 
                     key={el.budget_id} 
                     onLongPress={() => setBudgetElementMenu(el)}
                     onPress={() => setBudgetPage(el)}>
@@ -24,8 +24,6 @@ export default BudgetList
 
 const style = StyleSheet.create({
     container : {
-        paddingHorizontal : 10,
-        marginTop : 3,
         paddingTop : 20,
         marginBottom: 58
     }

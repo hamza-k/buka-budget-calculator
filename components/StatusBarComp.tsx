@@ -5,7 +5,7 @@ import {darkThemeColor} from '../assets/colors.js'
 var colors = darkThemeColor
 
 const StatusBarComp = () => (
-    <StatusBar backgroundColor={colors.background} barStyle='light-content'/>
+    <StatusBar backgroundColor={'#ffffff'} barStyle='dark-content'/>
 )
 
 export default StatusBarComp

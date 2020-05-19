@@ -18,37 +18,37 @@ const ItemEditConfirmationModal = ({
     <View style={[style.container, {height: (isActive) ? "100%" : 0}]}>
         <TouchableWithoutFeedback>
             <View style={[style.modal, {bottom : (isActive) ? 0 : -400}]}>
-                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15, marginLeft: 10}}>Enter a name for your item :</Text>
+                <Text style={{color: "#3a3a3a", fontSize: 20, marginBottom: 15, marginLeft: 10}}>Enter a name for your item :</Text>
                 <Input
                 leftIcon={
                     <Icon
                     name='chevron-right'
                     size={20}
-                    color='#fbfbfb'
+                    color='#3a3a3a'
                     />
                 }
                 containerStyle={{marginBottom: 30}}
-                inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+                inputStyle={{fontSize: 20, color: "#3a3a3a"}}
                 labelStyle={{fontStyle: "italic"}}
                 value={itemNameValue}
                 onChangeText={value => EditItemNameData(value)}/>
-                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15, marginLeft: 10}}>Enter its price :</Text>
+                <Text style={{color: "#3a3a3a", fontSize: 20, marginBottom: 15, marginLeft: 10}}>Enter its price :</Text>
                 <View style={{flexDirection: "row"}}>
                     <Input
                     leftIcon={
                         <Icon
                         name='chevron-right'
                         size={20}
-                        color='#fbfbfb'
+                        color='#3a3a3a'
                         />
                     }
                     containerStyle={{marginBottom: 30, width: "75%"}}
-                    inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+                    inputStyle={{fontSize: 20, color: "#3a3a3a"}}
                     labelStyle={{fontStyle: "italic"}}
                     keyboardType = 'decimal-pad'
                     value={(itemPriceValue != 0) ? itemPriceValue.toString() : ""}
                     onChangeText={value => EditItemPriceData(value)}/>
-                    <Text style={{color: "#fbfbfb", fontSize: 20, paddingTop: 15}}>€</Text>
+                    <Text style={{color: "#3a3a3a", fontSize: 20, paddingTop: 15}}>€</Text>
                 </View>
                 <View style={style.buttonsContainer}>
 
@@ -63,7 +63,7 @@ const ItemEditConfirmationModal = ({
                         }
                         iconLeft
                         titleStyle={{fontSize: 20}}
-                        buttonStyle={style.buttonStyle}
+                        buttonStyle={[style.buttonStyle, {backgroundColor: "#ea9453"}]}
                         title="   Submit"
                         onPress={() => toConfirmEditCB()}/>
                     </View>
@@ -73,11 +73,11 @@ const ItemEditConfirmationModal = ({
                             <Icon
                             name="cross"
                             size={20}
-                            color="white"
+                            color="#ea9453"
                             />
                         }
                         iconLeft
-                        titleStyle={{fontSize: 20}}
+                        titleStyle={{fontSize: 20, color: "#3a3a3a"}}
                         buttonStyle={style.buttonStyle}
                         title="   Cancel"
                         onPress={() => exitModalCB()}/>
@@ -101,12 +101,12 @@ const style = StyleSheet.create({
     },
     modal : {
         padding: 30,
-        backgroundColor: "#303030",
+        backgroundColor: "#ffffff",
         position: "absolute",
         width: "100%"
     },
     title : {
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         fontSize: 24,
         fontWeight: "bold",
         textAlign: "center",
@@ -123,6 +123,6 @@ const style = StyleSheet.create({
     buttonStyle: {
         paddingHorizontal: 20, 
         paddingVertical: 10,
-        backgroundColor: "#202020"
+        backgroundColor: "#ffffff"
         }
 })

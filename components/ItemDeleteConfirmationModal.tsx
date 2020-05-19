@@ -15,13 +15,13 @@ const ItemDeleteConfirmationModal = ({
     <View style={[style.container, {height: (isActive) ? "100%" : 0}]}>
         <TouchableWithoutFeedback>
             <View style={[style.modal, {bottom : (isActive) ? 0 : -350}]}>
-                <Text style={{color: "#fbfbfb", fontSize: 20, marginBottom: 15}}>Are you sure you want to delete this budget :</Text>
+                <Text style={{color: "#3a3a3a", fontSize: 20, marginBottom: 15}}>Are you sure you want to delete this budget :</Text>
                 <Text style={[style.title, {
                     fontWeight: (itemElement.item_name != "") ? "bold" : "normal",
                     fontStyle : (itemElement.item_name != "") ? "normal" : "italic",
                     opacity : (itemElement.item_name != "") ? 1.0 : 0.5
                 }]}>{(itemElement.item_name != "") ? itemElement.item_name : "No name here"}</Text>
-                <Text style={{color: "#fbfbfb", fontSize: 30, alignSelf : "center", marginBottom: 30, fontStyle: 'italic', fontWeight: "bold"}}>{itemElement.item_price} €</Text>
+                <Text style={{color: "#3a3a3a", fontSize: 30, alignSelf : "center", marginBottom: 30, fontStyle: 'italic', fontWeight: "bold"}}>{itemElement.item_price} €</Text>
                 <View style={style.buttonsContainer}>
                     <View style={style.buttonItem}>
                         <Button
@@ -34,7 +34,7 @@ const ItemDeleteConfirmationModal = ({
                         }
                         iconLeft
                         titleStyle={{fontSize: 20}}
-                        buttonStyle={style.buttonStyle}
+                        buttonStyle={[style.buttonStyle, {backgroundColor: "#ea9453"}]}
                         title="   Confirm"
                         onPress={() => toDeleteCB(itemElement)}/>
                     </View>
@@ -44,11 +44,11 @@ const ItemDeleteConfirmationModal = ({
                             <Icon
                             name="cross"
                             size={20}
-                            color="white"
+                            color="#ea9453"
                             />
                         }
                         iconLeft
-                        titleStyle={{fontSize: 20}}
+                        titleStyle={{fontSize: 20, color: "#3a3a3a"}}
                         buttonStyle={style.buttonStyle}
                         title="   Cancel"
                         onPress={() => exitModalCB()}/>
@@ -72,12 +72,12 @@ const style = StyleSheet.create({
     },
     modal : {
         padding: 30,
-        backgroundColor: "#303030",
+        backgroundColor: "#ffffff",
         position: "absolute",
         width: "100%"
     },
     title : {
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         fontSize: 24,
         fontWeight: "bold",
         textAlign: "center",
@@ -94,6 +94,6 @@ const style = StyleSheet.create({
     buttonStyle: {
         paddingHorizontal: 20, 
         paddingVertical: 10,
-        backgroundColor: "#202020"
+        backgroundColor: "#ffffff"
         }
 })

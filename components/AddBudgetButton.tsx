@@ -4,19 +4,19 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
 const AddBudgetButton = ({activeModalCB}) => (
-    <View style={{position: "absolute", bottom: 0, width: "100%"}}>
+    <View style={style.container}>
         <Button
         icon={
             <Icon
             name="circle-with-plus"
             size={20}
-            color="white"
+            color="#ffffff"
             />
         }
-        iconLeft
         title="  Add a new budget"
-        titleStyle={{fontSize: 20}}
-        buttonStyle={{width: "100%", paddingVertical: 15, backgroundColor: "#303030"}}
+        titleStyle={{fontSize: 20, color: "#ffffff"}}
+        containerStyle={style.btnContainerStyle}
+        buttonStyle={style.buttonStyle}
         onPress={() => activeModalCB()}
         />
     </View>
@@ -25,12 +25,24 @@ const AddBudgetButton = ({activeModalCB}) => (
 export default AddBudgetButton
 
 const style = StyleSheet.create({
-    modalContainer : {
+    container : {
+        padding: 10,
         position: "absolute", 
-        bottom: 0,
-        left: 0,
-        backgroundColor: "#00000088",
-        width : "100%",
-        height: "100%"
+        bottom: 0, 
+        width: "100%"
+    },
+    btnContainerStyle: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: -4,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,},
+    buttonStyle : {
+        elevation: 7,
+        width: "100%", 
+        paddingVertical: 15, 
+        backgroundColor: "#ea9453",
     }
 })

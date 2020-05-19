@@ -26,11 +26,11 @@ const AddItemModal = ({
                 <Icon
                 name='chevron-right'
                 size={20}
-                color='#fbfbfb'
+                color='#3a3a3a'
                 />
             }
             containerStyle={{marginBottom: 30}}
-            inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+            inputStyle={{fontSize: 20, color: "#3a3a3a"}}
             labelStyle={{fontStyle: "italic"}}
             onChangeText={value => getNewItemNameCB(value)}/>
             <View style={{flexDirection: "row"}}>
@@ -42,14 +42,14 @@ const AddItemModal = ({
                     <Icon
                     name='chevron-right'
                     size={20}
-                    color='#fbfbfb'
+                    color='#3a3a3a'
                     />
                 }
                 containerStyle={{marginBottom: 30, width: "75%"}}
-                inputStyle={{fontSize: 20, color: "#fbfbfb"}}
+                inputStyle={{fontSize: 20, color: "#3a3a3a"}}
                 labelStyle={{fontStyle: "italic"}}
                 onChangeText={value => getNewItemPriceCB(value)}/>
-                <Text style={{color: "#fbfbfb", fontSize: 20, paddingTop: 15}}>€</Text>
+                <Text style={{color: "#3a3a3a", fontSize: 20, paddingTop: 15}}>€</Text>
             </View>
             <View style={style.buttonsContainer}>
                     <View style={style.buttonItem}>
@@ -63,7 +63,7 @@ const AddItemModal = ({
                         }
                         iconLeft
                         titleStyle={{fontSize: 20}}
-                        buttonStyle={style.buttonStyle}
+                        buttonStyle={[style.buttonStyle, {backgroundColor: "#ea9453"}]}
                         title="   Confirm"
                         onPress={() => createNewItemCB()}/>
                     </View>
@@ -73,11 +73,11 @@ const AddItemModal = ({
                             <Icon
                             name="cross"
                             size={20}
-                            color="white"
+                            color="#ea9453"
                             />
                         }
                         iconLeft
-                        titleStyle={{fontSize: 20}}
+                        titleStyle={{fontSize: 20, color: "#3a3a3a"}}
                         buttonStyle={style.buttonStyle}
                         title="   Cancel"
                         onPress={() => closeAddItemModalCB()}/>
@@ -101,12 +101,12 @@ const style = StyleSheet.create({
     },
     modal : {
         padding: 30,
-        backgroundColor: "#303030",
+        backgroundColor: "#ffffff",
         position: "absolute",
         width: "100%"
     },
     title : {
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         fontSize: 24,
         fontWeight: "bold",
         textAlign: "center",
@@ -114,8 +114,8 @@ const style = StyleSheet.create({
         marginBottom: 0
     },
     input : {
-        color: "#fbfbfb",
-        borderBottomColor: "#fbfbfb",
+        color: "#3a3a3a",
+        borderBottomColor: "#3a3a3a",
         borderBottomWidth: 1,
         marginBottom: 30,
         fontSize: 30,
@@ -131,6 +131,6 @@ const style = StyleSheet.create({
     buttonStyle: {
         paddingHorizontal: 20, 
         paddingVertical: 10,
-        backgroundColor: "#202020"
+        backgroundColor: "#ffffff"
     }
 })

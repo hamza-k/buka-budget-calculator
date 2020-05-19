@@ -8,14 +8,14 @@ const BudgetTabs = ({activeTab, setTabCB}) => (
         activeOpacity={.8} 
         onPress={() => setTabCB("calculator")}>
             <View style={[style.activeTabBg, {right : (activeTab == 'calculator') ? 0 : "100%"}]}/>
-            <Text style={[style.title, {color : (activeTab == 'calculator') ? "#303030" : "#fbfbfb"}]}>Calculator</Text>
+            <Text style={[style.title, {color : (activeTab == 'calculator') ? "#ffffff" : "#ea9453"}]}>Calculator</Text>
         </TouchableOpacity>
         <TouchableOpacity 
         style={style.touchableTab} 
         activeOpacity={.8}
         onPress={() => setTabCB("checklist")}>
             <View style={[style.activeTabBg, {left : (activeTab == 'checklist') ? 0 : "100%"}]}/>
-            <Text style={[style.title, {color : (activeTab == 'checklist') ? "#303030" : "#fbfbfb"}]}>CheckList</Text>
+            <Text style={[style.title, {color : (activeTab == 'checklist') ? "#ffffff" : "#ea9453"}]}>CheckList</Text>
         </TouchableOpacity>
     </View>
 )
@@ -48,7 +48,7 @@ const style = StyleSheet.create({
     activeTabBg : {
         position: "absolute",
         top: 0,
-        backgroundColor: "#fbfbfb",
+        backgroundColor: "#ea9453",
         width: "100%",
         height: 24,
         borderRadius: 6

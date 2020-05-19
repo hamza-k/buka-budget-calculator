@@ -434,7 +434,7 @@ export default class BudgetPage extends Component {
 
 const style = StyleSheet.create({
     container : {
-        backgroundColor : "#000000",
+        backgroundColor : "#ffffff",
         height: "100%",
         flex: 1,
         position: "relative"

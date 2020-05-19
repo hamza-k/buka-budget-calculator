@@ -33,7 +33,7 @@ class BudgetListElement extends Component {
         if (this.getTotalItem() == this.getTotalCheckedItem() && this.getTotalItem() != 0 ) {
             return (
                 <View style={{position: "absolute", right: -25, top: -25, opacity: 0.1}}>
-                    <Icon name="check" size={100} color="#fbfbfb" />
+                    <Icon name="check" size={100} color="#3a3a3a" />
                 </View>
             )
         }
@@ -69,28 +69,39 @@ export default BudgetListElement
 
 const style = StyleSheet.create({
     container : {
-        backgroundColor : "#303030",
+        backgroundColor : "#ffffff",
         borderRadius : 6,
         marginBottom : 30,
+        marginTop : 10,
+        marginHorizontal: 10,
         position : "relative",
-        overflow: "hidden"
+        overflow: "hidden",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        
+        elevation: 7,
     },
     title : {
-        color : "#fbfbfb",
+        color : "#3a3a3a",
         fontSize : 20,
         borderBottomWidth : 1,
-        borderBottomColor : "#fbfbfb",
+        borderBottomColor : "#3a3a3a",
         paddingBottom : 10,
         marginTop: 20,
         marginHorizontal: 20
     },
     pricingTag : {
         fontSize : 18,
-        color : "#909090"
+        color : "#3a3a3a"
     },
     pricingCheckedTag : {
         fontSize : 22,
-        color : "#fbfbfb",
+        color : "#3a3a3a",
         marginLeft : 20,
         fontWeight : "bold"
     }

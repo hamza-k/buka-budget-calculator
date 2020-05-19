@@ -22,12 +22,12 @@ const BudgetElementMenu = ({isActive, budgetElement, exitModalCB, toConfirmDelet
                             <Icon
                             name="pencil"
                             size={20}
-                            color="white"
+                            color="#ffffff"
                             />
                         }
                         iconLeft
-                        titleStyle={{fontSize: 20}}
-                        buttonStyle={style.buttonStyle}
+                        titleStyle={{fontSize: 20, color: "#ffffff"}}
+                        buttonStyle={[style.buttonStyle, {backgroundColor: "#ea9453"}]}
                         title="   Edit name"
                         onPress={() => toConfirmeEditCB()}/>
                     </View>
@@ -37,11 +37,11 @@ const BudgetElementMenu = ({isActive, budgetElement, exitModalCB, toConfirmDelet
                             <Icon
                             name="trash"
                             size={20}
-                            color="white"
+                            color="#ea9453"
                             />
                         }
                         iconLeft
-                        titleStyle={{fontSize: 20}}
+                        titleStyle={{fontSize: 20, color: "#3a3a3a"}}
                         buttonStyle={style.buttonStyle}
                         title="   Delete"
                         onPress={() => toConfirmDeleteCB()}/>
@@ -65,12 +65,12 @@ const style = StyleSheet.create({
     },
     modal : {
         padding: 30,
-        backgroundColor: "#303030",
+        backgroundColor: "#ffffff",
         position: "absolute",
         width: "100%"
     },
     title : {
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         fontSize: 24,
         fontWeight: "bold",
         textAlign: "center",
@@ -87,6 +87,6 @@ const style = StyleSheet.create({
     buttonStyle: {
         paddingHorizontal: 20, 
         paddingVertical: 10,
-        backgroundColor: "#202020"
+        backgroundColor: "#ffffff"
         }
 })

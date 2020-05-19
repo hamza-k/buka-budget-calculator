@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import StatusBarComp from './StatusBarComp';
 import Header from './Header';
-import {Text, View, StyleSheet} from 'react-native'
+import {Text, View, StyleSheet, Image} from 'react-native'
+import HKLogo from '../assets/hk-logo.jpg'
 
 export default class OptionPage extends Component {
     constructor(props){
@@ -28,11 +29,19 @@ export default class OptionPage extends Component {
             <View style={style.container}>
                 <StatusBarComp/>
 
-                <Header title="Budget Calculator" 
+                <Header 
                 goOptionCB={this.goOption} 
                 goHomeCB={this.goHome} />
-                
-                <Text style={style.text}>Options are coming, baby</Text>
+                <View style={style.aboutContainer}>
+                    <Text style={style.text}>© BuKa - Budget Calculator</Text>
+                    <Text style={{textAlign: "center", fontSize: 20, fontStyle: "italic"}}>by Hamza KHADRI</Text>
+                    <Text style={{textAlign: "center", fontSize: 16, fontStyle: "italic"}}>Powered with React Native, Expo and React Native Elements</Text>
+                    <View style={{flexDirection: "row", justifyContent: "space-evenly", marginTop: 20}}>
+                        <Text style={{fontStyle: 'italic', opacity: 0.7}}>github.com/hamza-k</Text>
+                        <Text style={{fontStyle: 'italic', opacity: 0.7}}>hamzakhadri.com</Text>
+                    </View>
+                    <Image source={HKLogo} style={style.logo}/>
+                </View>
             </View>
         )
     }
@@ -40,16 +49,25 @@ export default class OptionPage extends Component {
 
 const style = StyleSheet.create({
     container : {
-        backgroundColor: "#000000",
+        backgroundColor: "#ffffff",
         flex: 1
     },
     text : {
-        color: "#fbfbfb",
-        fontSize: 48,
-        opacity: 0.5,
+        color: "#3a3a3a",
+        fontSize: 24,
         fontWeight: "bold",
         fontStyle: "italic",
         textAlign: "center",
-        padding: 50
+    },
+    aboutContainer : {
+        marginHorizontal: 10,
+        marginTop: 30,
+        marginBottom: 50
+    },
+    logo : {
+        height: 70,
+        width: 112,
+        alignSelf: "center",
+        marginTop: 50
     }
 })

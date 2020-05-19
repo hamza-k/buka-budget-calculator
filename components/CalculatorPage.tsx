@@ -36,7 +36,7 @@ const CalculatorPage = ({
                 latestBudgetItems.map(element => {
                     
                     return (
-                        <View key={element.item_id} style={[style.latestBudgetItemContainer, {backgroundColor: "#202020", paddingHorizontal: 20, borderRadius: 6}]}>
+                        <View key={element.item_id} style={[style.latestBudgetItemContainer, {backgroundColor: "#ebebeb", paddingHorizontal: 20, borderRadius: 6}]}>
                             <Text style={[style.latestBudgetItemText, {
                                 fontWeight: (element.item_name != "") ? "bold" : "normal",
                                 fontStyle: (element.item_name == "") ? "italic" : "normal",
@@ -196,7 +196,7 @@ const CalculatorPage = ({
                         activeOpacity={.8} 
                         style={style.outputButton}
                         onPress={() => doEvalOutput()}>
-                            <Icon name='enter' size={20} color="#fbfbfb"/>
+                            <Icon name='enter' size={20} color="#3a3a3a"/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -225,7 +225,7 @@ const style = StyleSheet.create({
         marginTop: 15
     },
     latestBudgetItemText : {
-        color: "#fbfbfb", 
+        color: "#3a3a3a", 
         fontSize: 20, 
         paddingVertical: 10
         },
@@ -237,7 +237,7 @@ const style = StyleSheet.create({
         marginTop: 10
     },
     calculatorOutput : {
-        color: "#fbfbfb", 
+        color: "#3a3a3a", 
         fontSize: 50, 
         paddingVertical: 10, 
         paddingHorizontal: 10, 
@@ -277,7 +277,7 @@ const style = StyleSheet.create({
         flexGrow : 1
     },
     buttonText : {
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         fontSize: 30,
     },
     brackerButtonText: {
@@ -288,12 +288,12 @@ const style = StyleSheet.create({
         paddingVertical: 3
     },
     coloredButton: {
-        backgroundColor: "#303030",
+        backgroundColor: "#cbcbcb",
         borderRadius: 3
     },
     emptyArrayMessage : {
         fontSize: 30,
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         textAlign: "center",
         width: "70%",
         marginTop: 10

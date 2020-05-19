@@ -121,7 +121,7 @@ export default class HomePage extends Component {
                         <Icon
                         name="circle-with-plus"
                         size={60}
-                        color="white"
+                        color="#3a3a3a"
                         />
                     </View>
                     <Text style={style.emptyArrayMessage}>Let's start to create a new budget</Text>
@@ -220,14 +220,14 @@ export default class HomePage extends Component {
 
 const style = StyleSheet.create({
     container : {
-        backgroundColor : "#000000",
+        backgroundColor : "#ffffff",
         height: "100%",
         flex: 1,
         position: "relative"
     },
     emptyArrayMessage : {
         fontSize: 30,
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         textAlign: "center",
         width: "70%",
         marginTop: 10

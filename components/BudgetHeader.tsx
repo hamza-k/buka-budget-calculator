@@ -27,22 +27,22 @@ const style = StyleSheet.create({
     container: {
         paddingBottom: 20,
         borderBottomWidth: 2,
-        borderBottomColor: "#fbfbfb"
+        borderBottomColor: "#ea9453"
     },
     budgetName: {
         fontStyle: "italic",
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         fontSize: 28
     },
     budgetPriceLeft : {
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         textAlign: "right",
         fontSize: 60,
         fontWeight: "bold"
     },
     budgetPriceTotal : {
         fontSize : 22,
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         opacity: .5,
         textAlign: "right",
     }

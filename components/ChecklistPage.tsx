@@ -34,15 +34,12 @@ const ChecklistPage = ({
                         onPress={() => GiveCheckOnItCB(element)} 
                         onLongPress={() => openItemMenuCB(element)} 
                         activeOpacity={1} key={element.item_id} 
-                        style={[style.checklistItemContainer, {
-                            backgroundColor : (!element.item_checked) ? "#20202000" : "#202020FF"
-                        }]}>
+                        style={[style.checklistItemContainer]}>
                             <MCIicon
                             name={(element.item_checked) ? 'checkbox-blank-circle' : 'checkbox-blank-circle-outline'}
-                            style={[style.checklistItemText, {alignSelf: "center"}]}/>
+                            style={[style.checklistItemText, {alignSelf: "center", color: "#ea9453"}]}/>
                             <View style={style.checklistItemContents}>
                                 <Text style={[style.checklistItemText, style.checklistItemName, {
-                                    fontStyle: (element.item_name != "" || element.item_checked) ? "normal" : "italic",
                                     fontWeight: (element.item_name != "") ? "bold" : "normal",
                                     opacity : (element.item_name != "") ? 1.0 : 0.5
                                 }]}>
@@ -67,7 +64,7 @@ const ChecklistPage = ({
         iconLeft
         title="  Add a new item"
         titleStyle={{fontSize: 20}}
-        buttonStyle={{width: "100%", padding: 15, backgroundColor: "#303030"}}
+        buttonStyle={{width: "100%", padding: 15, backgroundColor: "#ea9453"}}
         onPress={() => openAddItemModalCB()}
         />
     </View>
@@ -91,7 +88,7 @@ const style = StyleSheet.create({
         padding: 20,
         borderRadius: 6,
         marginTop: 10,
-        marginBottom: 20,
+        marginBottom: 20
     },
     checklistItemContents : {
         paddingHorizontal: 20,
@@ -99,7 +96,7 @@ const style = StyleSheet.create({
     },
     checklistItemText: {
         fontSize: 20,
-        color: "#fbfbfb"
+        color: "#3a3a3a"
     },
     checklistItemName : {
         fontWeight: "bold",
@@ -110,7 +107,7 @@ const style = StyleSheet.create({
     },
     emptyArrayMessage : {
         fontSize: 30,
-        color: "#fbfbfb",
+        color: "#3a3a3a",
         textAlign: "center",
         width: "70%",
         marginTop: 10
