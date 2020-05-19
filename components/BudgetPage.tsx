@@ -187,7 +187,6 @@ export default class BudgetPage extends Component {
     fetchBudgetLatestItems = () => {
         let result_fetchCalcItem = this.state.activeBudget.budget_items.slice(-4)
         this.setState({latestBudgetItems : result_fetchCalcItem})
-        console.log(this.state.latestBudgetItems)
     }
 
     // CRUD
@@ -333,7 +332,6 @@ export default class BudgetPage extends Component {
             newItemName : this.state.activeItem.item_name,
             newItemPrice : this.state.activeItem.item_price
         })
-        console.log(this.state.activeItem.item_price)
     }
     exitItemEditModal = () => {
         this.setState({
