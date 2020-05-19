@@ -1,24 +1,26 @@
-import React, { Component} from 'react'
-import {Animated, View, TouchableOpacity, Text, StyleSheet} from 'react-native'
+import React from 'react'
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native'
 
-const BudgetTabs = ({activeTab, setTabCB}) => (
-    <View style={style.container}>
-        <TouchableOpacity 
-        style={style.touchableTab} 
-        activeOpacity={.8} 
-        onPress={() => setTabCB("calculator")}>
-            <View style={[style.activeTabBg, {right : (activeTab == 'calculator') ? 0 : "100%"}]}/>
-            <Text style={[style.title, {color : (activeTab == 'calculator') ? "#ffffff" : "#ea9453"}]}>Calculator</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-        style={style.touchableTab} 
-        activeOpacity={.8}
-        onPress={() => setTabCB("checklist")}>
-            <View style={[style.activeTabBg, {left : (activeTab == 'checklist') ? 0 : "100%"}]}/>
-            <Text style={[style.title, {color : (activeTab == 'checklist') ? "#ffffff" : "#ea9453"}]}>CheckList</Text>
-        </TouchableOpacity>
-    </View>
-)
+const BudgetTabs = ({activeTab, setTabCB}) => { 
+    return (
+        <View style={style.container}>
+            <TouchableOpacity 
+            style={style.touchableTab} 
+            activeOpacity={.8} 
+            onPress={() => setTabCB("calculator")}>
+                <View style={[style.activeTabBg, {right : (activeTab == 'calculator') ? 0 : "100%"}]}/>
+                <Text style={[style.title, {color : (activeTab == 'calculator') ? "#ffffff" : "#ea9453"}]}>Calculator</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+            style={style.touchableTab} 
+            activeOpacity={.8}
+            onPress={() => setTabCB("checklist")}>
+                <View style={[style.activeTabBg, {left : (activeTab == 'checklist') ? 0 : "100%"}]}/>
+                <Text style={[style.title, {color : (activeTab == 'checklist') ? "#ffffff" : "#ea9453"}]}>CheckList</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
 export default BudgetTabs
 
 const style = StyleSheet.create({

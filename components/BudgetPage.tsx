@@ -25,7 +25,7 @@ export default class BudgetPage extends Component {
             calculatorOutput : "0",
             isReadyToClearOutput : true,
             newItemName : "",
-            newItemPrice : 0.00,
+            newItemPrice : "",
             isAddItemModalActive : false,
             activeItem : {},
             isItemElementMenuActive : false,
@@ -198,22 +198,16 @@ export default class BudgetPage extends Component {
         })
     }
     getNewItemPrice = el => {
-        let newPrice = parseFloat(el)
-        if (isNaN(newPrice)){
             this.setState({
-                newItemPrice : 0.00
+                newItemPrice : el
             })
-        } else {
-            this.setState({
-                newItemPrice : Math.round(newPrice * 100) / 100
-            })
-        }
     }
     createNewItem = () => {
+        let newItemPrice = (!isNaN(this.state.newItemPrice)) ? this.state.newItemPrice : "0"
         let newItem = {
             "item_id" : Math.round(Math.random() * 1000000),
             "item_name" : this.state.newItemName,
-            "item_price" : this.state.newItemPrice,
+            "item_price" : Math.round(eval(newItemPrice) * 100) / 100,
             "item_checked" : false
         }
         let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
@@ -232,7 +226,9 @@ export default class BudgetPage extends Component {
             newItemName : "",
             newItemPrice : 0.0
         }, () => this.saveBudgetList())
+
     }
+
     GiveCheckOnIt = el => {
         el.item_checked = !el.item_checked
 
@@ -269,14 +265,15 @@ export default class BudgetPage extends Component {
     }
     setReadyNewItemPrice = el => {
         this.setState({
-            newItemPrice : (el != "") ? parseFloat(el) : 0.00
+            newItemPrice : el
         })
     }
     toEditItem = () => {
+        let newItemPrice = eval(this.state.newItemPrice)
         let newActiveBudget = this.state.activeBudget
         let newActiveItem = this.state.activeItem
         newActiveItem.item_name = this.state.newItemName
-        newActiveItem.item_price = this.state.newItemPrice
+        newActiveItem.item_price = (!isNaN(newItemPrice)) ? Math.round(newItemPrice * 100) / 100 : 0
         let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
         let newBudgetList = this.state.budgetList
         newBudgetList[indexActiveBudget] = newActiveBudget
@@ -401,7 +398,6 @@ export default class BudgetPage extends Component {
                 createNewItemCB={this.createNewItem}
                 getNewItemNameCB={this.getNewItemName}
                 getNewItemPriceCB={this.getNewItemPrice}
-                createNewItemCB={this.createNewItem}
                 defaultNewNameValue={this.state.newItemName}
                 defaultNewPriceValue={this.state.newItemPrice}/>
 

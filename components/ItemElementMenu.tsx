@@ -35,7 +35,7 @@ const ItemElementMenu = ({
                         iconLeft
                         titleStyle={{fontSize: 20}}
                         buttonStyle={[style.buttonStyle, {backgroundColor: "#ea9453"}]}
-                        title="   Edit name"
+                        title="   Edit item"
                         onPress={() => toConfirmeEditCB()}/>
                     </View>
                     <View style={style.buttonItem}>
