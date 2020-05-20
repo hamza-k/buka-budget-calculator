@@ -202,11 +202,11 @@ export default class BudgetPage extends Component {
             })
     }
     createNewItem = () => {
-        let newItemPrice = (!isNaN(this.state.newItemPrice)) ? this.state.newItemPrice : "0"
+        let newItemPrice = (this.state.newItemPrice != "") ? this.state.newItemPrice : "0"
         let newItem = {
             "item_id" : Math.round(Math.random() * 1000000),
             "item_name" : this.state.newItemName,
-            "item_price" : Math.round(eval(newItemPrice) * 100) / 100,
+            "item_price" : Math.round(parseFloat(newItemPrice) * 100) / 100,
             "item_checked" : false
         }
         let indexActiveBudget = this.state.budgetList.findIndex( el => el.budget_id == this.state.activeBudget.budget_id)
