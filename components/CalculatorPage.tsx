@@ -1,8 +1,9 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native'
-
+import { RFValue } from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/AntDesign';
 import Eicon from 'react-native-vector-icons/Entypo';
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 
 const CalculatorPage = ({
     budgetLatestItems,
@@ -16,7 +17,7 @@ const CalculatorPage = ({
     doEvalOutput,
     latestBudgetItems
     }) =>  (
-    <View style={[style.container, {right: (isActive) ? 0 : "100%" }]}>
+    <View style={[style.container, {left: (isActive) ? 0 : "100%" }]}>
         <View style={style.latestBudgetContainer}>
             <View style={[style.emptyListContainer, {
                 height: (budgetLatestItems == []) ? "100%" : 0, 
@@ -54,7 +55,7 @@ const CalculatorPage = ({
             <Text 
             style={style.calculatorOutput}>{calcOutput}</Text>
         </View>
-        <View style={[style.calculatorContainer, {height: 170}]}>
+        <View style={[style.calculatorContainer]}>
             <View style={style.bracketsGroup}>
                 <TouchableOpacity 
                 activeOpacity={.8} 
@@ -214,31 +215,34 @@ const style = StyleSheet.create({
     },
     latestBudgetContainer : {
         padding: 10, 
-        height: Dimensions.get('window').height - 620,
-        justifyContent: "flex-end",
-        flexDirection: "column"
+        height: Dimensions.get('screen').height - 600,
+        justifyContent: "center",
+        flexDirection: "column",
     },
     latestBudgetItemContainer : {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems : "center",
-        marginTop: 15
+        marginTop: 15,
+        width: Dimensions.get('screen').width - 20
     },
     latestBudgetItemText : {
         color: "#3a3a3a", 
-        fontSize: 20, 
+        fontSize: RFValue(20), 
         paddingVertical: 10
         },
     latestBudgetItemPrice : {
-        fontSize: 35
+        fontSize: RFValue(35, 1000)
     },
     calculatorContainer: {
         marginHorizontal: 10,
-        marginTop: 10
+        marginTop: 10,
+        paddingBottom: 20,
+        width: Dimensions.get('screen').width - 20,
     },
     calculatorOutput : {
         color: "#3a3a3a", 
-        fontSize: 50, 
+        fontSize: RFValue(50, 1000), 
         paddingVertical: 10, 
         paddingHorizontal: 10, 
         fontWeight : "bold", 
@@ -253,7 +257,7 @@ const style = StyleSheet.create({
         alignItems: "center",
         margin: 2,
         justifyContent: "center",
-        paddingVertical: 10
+        paddingVertical: 7
     },
     outputButton : {
         flexGrow : 400,
@@ -278,10 +282,10 @@ const style = StyleSheet.create({
     },
     buttonText : {
         color: "#3a3a3a",
-        fontSize: 30,
+        fontSize: RFValue(30, 1000),
     },
     brackerButtonText: {
-        fontSize: 16,
+        fontSize: RFValue(16, 1000),
         fontWeight: "bold"
     },
     bracketButton: {

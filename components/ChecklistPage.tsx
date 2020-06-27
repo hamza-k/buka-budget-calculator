@@ -3,6 +3,8 @@ import {View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity} from '
 import { Button } from 'react-native-elements';
 import MCIicon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Eicon from 'react-native-vector-icons/Entypo';
+import { RFValue } from "react-native-responsive-fontsize";
+
 
 const ChecklistPage = ({
     isActive, 
@@ -34,10 +36,10 @@ const ChecklistPage = ({
                         onPress={() => GiveCheckOnItCB(element)} 
                         onLongPress={() => openItemMenuCB(element)} 
                         activeOpacity={1} key={element.item_id} 
-                        style={[style.checklistItemContainer]}>
+                        style={[style.checklistItemContainer, {}]}>
                             <MCIicon
-                            name={(element.item_checked) ? 'checkbox-blank-circle' : 'checkbox-blank-circle-outline'}
-                            style={[style.checklistItemText, {alignSelf: "center", color: "#ea9453"}]}/>
+                            name={(element.item_checked) ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
+                            style={[style.checklistItemText, {alignSelf: "center", color: "#ea9453", fontSize: 20}]}/>
                             <View style={style.checklistItemContents}>
                                 <Text style={[style.checklistItemText, style.checklistItemName, {
                                     fontWeight: (element.item_name != "") ? "bold" : "normal",
@@ -87,15 +89,15 @@ const style = StyleSheet.create({
         flexDirection: "row",
         padding: 20,
         borderRadius: 6,
-        marginTop: 10,
-        marginBottom: 20
+        marginTop: 5,
+        marginBottom: 5
     },
     checklistItemContents : {
         paddingHorizontal: 20,
         width: "100%"
     },
     checklistItemText: {
-        fontSize: 20,
+        fontSize: RFValue(20),
         color: "#3a3a3a"
     },
     checklistItemName : {
