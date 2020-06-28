@@ -1,5 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
+import { RFValue } from "react-native-responsive-fontsize";
+
 
 const BudgetHeader = ({budgetName, totalPrice, totalCheckedPrice, displayType}) => {
     if (displayType == "checklist") {
@@ -37,7 +39,7 @@ const style = StyleSheet.create({
     budgetPriceLeft : {
         color: "#3a3a3a",
         textAlign: "right",
-        fontSize: 60,
+        fontSize: RFValue(50, 850),
         fontWeight: "bold"
     },
     budgetPriceTotal : {

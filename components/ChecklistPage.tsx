@@ -79,7 +79,7 @@ const style = StyleSheet.create({
     container : {
         position: "absolute", 
         top: 0,
-        height: Dimensions.get('window').height - 262,
+        height: Dimensions.get('window').height - 247,
         paddingHorizontal: 10,
         alignItems: "stretch",
         width: "100%"

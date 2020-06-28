@@ -1,5 +1,7 @@
 import React from 'react'
-import {View, TouchableOpacity, Text, StyleSheet, Animated} from 'react-native'
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native'
+import { RFValue } from "react-native-responsive-fontsize";
+
 
 const BudgetTabs = ({activeTab, setTabCB}) => { 
     return (
@@ -42,7 +44,7 @@ const style = StyleSheet.create({
 
     title: {
         textAlign: "center",
-        fontSize: 16,
+        fontSize: RFValue(16, 700),
         fontWeight: "bold",
         textTransform: "uppercase",
         letterSpacing: 2

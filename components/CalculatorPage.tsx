@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native
 import { RFValue } from "react-native-responsive-fontsize";
 import Icon from 'react-native-vector-icons/AntDesign';
 import Eicon from 'react-native-vector-icons/Entypo';
-import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 
 const CalculatorPage = ({
     budgetLatestItems,
@@ -215,7 +214,7 @@ const style = StyleSheet.create({
     },
     latestBudgetContainer : {
         padding: 10, 
-        height: Dimensions.get('screen').height - 600,
+        height: Dimensions.get('window').height - 540,
         justifyContent: "center",
         flexDirection: "column",
     },
